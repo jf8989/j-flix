@@ -26,25 +26,37 @@ const server = http.createServer((req, res) => {
   });
 
   // Determine the file path based on the URL
-  const filePath = path.includes("documentation")
-    ? `${__dirname}/movie_api/documentation.html`
-    : `${__dirname}/movie_api/index.html`;
+  let filePath = "";
+  if (path.includes("documentation")) {
+    filePath = "documentation.html";
+  } else if (path === "/" || path === "/index.html") {
+    filePath = "index.html";
+  } else {
+    filePath = "";
+  }
 
-  // Read and serve the requested file
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      // If there's an error (e.g., file not found), send a 404 response
-      console.error("Failed to read file", err);
-      res.writeHead(404, { "Content-Type": "text/html" });
-      res.write("Not Found");
-    } else {
-      // If the file is read successfully, send a 200 response with the file content
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.write(data);
-    }
-    // End the response
+  if (filePath) {
+    // Read and serve the requested file
+    fs.readFile(filePath, "utf8", (err, data) => {
+      if (err) {
+        // If there's an error (e.g., file not found), send a 404 response
+        console.error("Failed to read file", err);
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.write("Not Found");
+      } else {
+        // If the file is read successfully, send a 200 response with the file content
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(data);
+      }
+      // End the response
+      res.end();
+    });
+  } else {
+    // If the path does not match, send a 404 response
+    res.writeHead(404, { "Content-Type": "text/html" });
+    res.write("Not Found");
     res.end();
-  });
+  }
 });
 
 // Start the server and listen on the specified port and hostname
