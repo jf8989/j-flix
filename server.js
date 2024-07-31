@@ -21,42 +21,30 @@ const server = http.createServer((req, res) => {
   const logEntry = `URL: ${req.url}, Timestamp: ${new Date().toISOString()}\n`;
   fs.appendFile("log.txt", logEntry, (err) => {
     if (err) {
-      console.error("Failed to write to log file");
+      console.error("Failed to write to log file", err);
     }
   });
 
-  // Check if the URL contains the word "documentation"
-  if (path.includes("documentation")) {
-    // Read and serve the documentation.html file
-    fs.readFile("./movie_api/documentation.html", "utf8", (err, data) => {
-      if (err) {
-        // If there's an error (e.g., file not found), send a 404 response
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.write("Not Found");
-      } else {
-        // If the file is read successfully, send a 200 response with the file content
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-      }
-      // End the response
-      res.end();
-    });
-  } else {
-    // Read and serve the index.html file if the URL does not contain "documentation"
-    fs.readFile("./movie_api/index.html", "utf8", (err, data) => {
-      if (err) {
-        // If there's an error (e.g., file not found), send a 404 response
-        res.writeHead(404, { "Content-Type": "text/plain" });
-        res.write("Not Found");
-      } else {
-        // If the file is read successfully, send a 200 response with the file content
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-      }
-      // End the response
-      res.end();
-    });
-  }
+  // Determine the file path based on the URL
+  const filePath = path.includes("documentation")
+    ? `${__dirname}/movie_api/documentation.html`
+    : `${__dirname}/movie_api/index.html`;
+
+  // Read and serve the requested file
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      // If there's an error (e.g., file not found), send a 404 response
+      console.error("Failed to read file", err);
+      res.writeHead(404, { "Content-Type": "text/html" });
+      res.write("Not Found");
+    } else {
+      // If the file is read successfully, send a 200 response with the file content
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+    }
+    // End the response
+    res.end();
+  });
 });
 
 // Start the server and listen on the specified port and hostname
