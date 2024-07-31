@@ -1,33 +1,65 @@
-// server.js
-const http = require('http');
-const fs = require('fs');
-const url = require('url');
+// Import the http module to create the server
+const http = require("http");
 
-const hostname = '127.0.0.1';
+// Import the fs (file system) module to read files and append logs
+const fs = require("fs");
+
+// Import the url module to parse the request URL
+const url = require("url");
+
+// Define the hostname and port where the server will listen
+const hostname = "127.0.0.1";
 const port = 8080;
 
+// Create the HTTP server
 const server = http.createServer((req, res) => {
+  // Parse the URL of the incoming request
   const parsedUrl = url.parse(req.url, true);
   const path = parsedUrl.pathname;
 
-  if (path === '/documentation') {
-    fs.readFile('./movie_api/documentation.html', 'utf8', (err, data) => {
+  // Log the request URL and timestamp
+  const logEntry = `URL: ${req.url}, Timestamp: ${new Date().toISOString()}\n`;
+  fs.appendFile("log.txt", logEntry, (err) => {
+    if (err) {
+      console.error("Failed to write to log file");
+    }
+  });
+
+  // Check if the URL contains the word "documentation"
+  if (path.includes("documentation")) {
+    // Read and serve the documentation.html file
+    fs.readFile("./movie_api/documentation.html", "utf8", (err, data) => {
       if (err) {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.write('Not Found');
+        // If there's an error (e.g., file not found), send a 404 response
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.write("Not Found");
       } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
+        // If the file is read successfully, send a 200 response with the file content
+        res.writeHead(200, { "Content-Type": "text/html" });
         res.write(data);
       }
+      // End the response
       res.end();
     });
   } else {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write('Hello, World!');
-    res.end();
+    // Read and serve the index.html file if the URL does not contain "documentation"
+    fs.readFile("./movie_api/index.html", "utf8", (err, data) => {
+      if (err) {
+        // If there's an error (e.g., file not found), send a 404 response
+        res.writeHead(404, { "Content-Type": "text/plain" });
+        res.write("Not Found");
+      } else {
+        // If the file is read successfully, send a 200 response with the file content
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.write(data);
+      }
+      // End the response
+      res.end();
+    });
   }
 });
 
+// Start the server and listen on the specified port and hostname
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
