@@ -27,3 +27,12 @@ const server = http.createServer((req, res) => {
     res.end();
   }
 });
+URL: /, Timestamp: 2024-08-01T18:58:16.469Z
+URL: /favicon.ico, Timestamp: 2024-08-01T18:58:16.983Z
+URL: /, Timestamp: 2024-08-01T18:58:25.776Z
+URL: /favicon.ico, Timestamp: 2024-08-01T18:58:26.070Z
+URL: /index.html, Timestamp: 2024-08-01T18:58:33.838Z
+URL: /index.html, Timestamp: 2024-08-01T18:58:42.061Z
+URL: /documentation, Timestamp: 2024-08-01T18:59:19.252Z
+URL: /documentation.html, Timestamp: 2024-08-01T18:59:32.645Z
+URL: /invalid, Timestamp: 2024-08-01T18:59:45.275Z
