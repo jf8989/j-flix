@@ -7,6 +7,7 @@ j-Flix is a robust server-side component of a movie web application. It provides
 ## 🚀 Features
 
 ### Essential Features
+
 - Retrieve a list of all movies
 - Get detailed information about a specific movie
 - Access data about movie genres
@@ -16,6 +17,7 @@ j-Flix is a robust server-side component of a movie web application. It provides
 - Favorite movies list management
 
 ### Optional Features (Future Implementation)
+
 - Actor information and movie appearances
 - Extended movie details (release date, ratings)
 - "To Watch" list functionality
@@ -31,17 +33,17 @@ j-Flix is a robust server-side component of a movie web application. It provides
 
 ## 📋 API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET    | /movies  | Get all movies |
-| GET    | /movies/:title | Get a specific movie by title |
-| GET    | /genres/:name | Get genre information |
-| GET    | /directors/:name | Get director information |
-| POST   | /users  | Register a new user |
-| PUT    | /users/:username | Update user information |
-| POST   | /users/:username/movies/:movieId | Add a movie to favorites |
-| DELETE | /users/:username/movies/:movieId | Remove a movie from favorites |
-| DELETE | /users/:username | Deregister a user |
+| Method | Endpoint                         | Description                   | Request Body                       | Response Body                        |
+| ------ | -------------------------------- | ----------------------------- | ---------------------------------- | ------------------------------------ |
+| GET    | /movies                          | Get all movies                | None                               | JSON array of movie objects          |
+| GET    | /movies/:title                   | Get a specific movie by title | None                               | JSON object with movie details       |
+| GET    | /genres/:name                    | Get genre information         | None                               | JSON object with genre details       |
+| GET    | /directors/:name                 | Get director information      | None                               | JSON object with director details    |
+| POST   | /users                           | Register a new user           | JSON object with user data         | JSON object with added user data     |
+| PUT    | /users/:username                 | Update user information       | JSON object with updated user data | JSON object with updated user data   |
+| POST   | /users/:username/movies/:movieId | Add a movie to favorites      | None                               | Text message confirming addition     |
+| DELETE | /users/:username/movies/:movieId | Remove a movie from favorites | None                               | Text message confirming removal      |
+| DELETE | /users/:username                 | Deregister a user             | None                               | Text message confirming user removal |
 
 ## 🔐 Authentication and Authorization
 
