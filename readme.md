@@ -62,19 +62,33 @@ API endpoints can be tested using Postman. Ensure to include the JWT token in th
 
 ## 📚 Documentation
 
-For detailed API documentation, please refer to the [API Documentation](link-to-your-api-docs).
+For detailed API documentation, please refer to the [API Documentation](public/documentation.html).
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+# j-Flix API
+
+[Previous sections remain unchanged]
+
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This means you are free to:
+
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+
+See the [LICENSE](LICENSE) file in the project root for the full license text.
 
 ## 👨‍💻 Author
 
-Juan Francisco - Full Stack Developer in training
+Juan Francisco Marcenaro A. - Full Stack Developer in training
 
 ---
 
