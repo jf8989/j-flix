@@ -84,7 +84,7 @@ See the [LICENSE.md](LICENSE.md) file in the project root for the full license t
 
 ## 👨‍💻 Author
 
-Juan Francisco - Full Stack Developer in training
+Juan Francisco Marcenaro A. - Full Stack Developer in training
 
 ---
 
