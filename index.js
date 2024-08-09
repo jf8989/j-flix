@@ -218,13 +218,18 @@ app.put("/movies/:title/description", async (req, res) => {
     const result = await db
       .collection("movies")
       .updateOne(
-        { title: req.params.title },
+        { title: { $regex: new RegExp(`^${req.params.title}$`, "i") } },
         { $set: { description: req.body.description } }
       );
-    if (result.modifiedCount === 0) {
+
+    if (result.matchedCount === 0) {
       res.status(404).send("Movie not found");
+    } else if (result.modifiedCount === 0) {
+      res.status(200).send("No changes were made to the movie description");
     } else {
-      res.json({ message: "Movie description updated successfully" });
+      res
+        .status(200)
+        .json({ message: "Movie description updated successfully" });
     }
   } catch (err) {
     console.error(err);
@@ -238,13 +243,20 @@ app.put("/directors/:name/bio", async (req, res) => {
     const result = await db
       .collection("movies")
       .updateMany(
-        { "director.name": req.params.name },
+        {
+          "director.name": { $regex: new RegExp(`^${req.params.name}$`, "i") },
+        },
         { $set: { "director.bio": req.body.bio } }
       );
-    if (result.modifiedCount === 0) {
+
+    if (result.matchedCount === 0) {
       res.status(404).send("Director not found");
+    } else if (result.modifiedCount === 0) {
+      res.status(200).send("No changes were made to the director's bio");
     } else {
-      res.json({ message: `Updated bio for ${result.modifiedCount} movies` });
+      res
+        .status(200)
+        .json({ message: `Updated bio for ${result.modifiedCount} movies` });
     }
   } catch (err) {
     console.error(err);
@@ -255,22 +267,29 @@ app.put("/directors/:name/bio", async (req, res) => {
 // UPDATE query 3: Add a certain movie to a particular user's list of favorites
 app.post("/users/:username/favorites/:movieTitle", async (req, res) => {
   try {
-    const movie = await db
-      .collection("movies")
-      .findOne({ title: req.params.movieTitle });
+    const movie = await db.collection("movies").findOne({
+      title: { $regex: new RegExp(`^${req.params.movieTitle}$`, "i") },
+    });
+
     if (!movie) {
       return res.status(404).send("Movie not found");
     }
+
     const result = await db
       .collection("users")
       .updateOne(
-        { username: req.params.username },
+        { username: { $regex: new RegExp(`^${req.params.username}$`, "i") } },
         { $addToSet: { favoriteMovies: movie._id } }
       );
-    if (result.modifiedCount === 0) {
-      res.status(404).send("User not found or movie already in favorites");
+
+    if (result.matchedCount === 0) {
+      res.status(404).send("User not found");
+    } else if (result.modifiedCount === 0) {
+      res.status(200).send("Movie is already in user's favorites");
     } else {
-      res.json({ message: "Movie added to favorites successfully" });
+      res
+        .status(200)
+        .json({ message: "Movie added to favorites successfully" });
     }
   } catch (err) {
     console.error(err);
