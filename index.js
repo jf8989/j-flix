@@ -314,6 +314,68 @@ app.delete("/users/:username", async (req, res) => {
   }
 });
 
+// GET movies by actor
+app.get('/movies/actor/:actorName', async (req, res) => {
+  try {
+    const movies = await db.collection('movies').find({ actors: req.params.actorName }).toArray();
+    res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  }
+});
+
+// GET movies by release year
+app.get('/movies/year/:year', async (req, res) => {
+  try {
+    const movies = await db.collection('movies').find({ releaseYear: parseInt(req.params.year) }).toArray();
+    res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  }
+});
+
+// GET movies by minimum rating
+app.get('/movies/rating/:minRating', async (req, res) => {
+  try {
+    const movies = await db.collection('movies').find({ rating: { $gte: parseFloat(req.params.minRating) } }).toArray();
+    res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  }
+});
+
+// GET all movies by a director
+app.get('/directors/:directorName/movies', async (req, res) => {
+  try {
+    const movies = await db.collection('movies').find({ 'director.name': req.params.directorName }).toArray();
+    res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  }
+});
+
+// UPDATE to add a movie to a director's filmography
+app.put('/directors/:directorName/movies/:movieId', async (req, res) => {
+  try {
+    const result = await db.collection('directors').updateOne(
+      { name: req.params.directorName },
+      { $addToSet: { movies: new ObjectId(req.params.movieId) } }
+    );
+    if (result.modifiedCount === 0) {
+      res.status(404).send('Director not found or movie already in filmography');
+    } else {
+      res.json({ message: 'Movie added to director\'s filmography successfully' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
