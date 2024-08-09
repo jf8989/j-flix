@@ -167,24 +167,21 @@ app.delete("/users/:username/movies/:movieId", async (req, res) => {
   }
 });
 
-// DELETE deregister user
-app.delete("/users/:username", async (req, res) => {
+// READ query 1: Read all movies that match a certain name
+app.get("/movies/name/:name", async (req, res) => {
   try {
-    const result = await db
-      .collection("users")
-      .deleteOne({ username: req.params.username });
-    if (result.deletedCount === 0) {
-      res.status(404).send("User not found");
-    } else {
-      res.status(200).send("User deregistered successfully");
-    }
+    const movies = await db
+      .collection("movies")
+      .find({ title: { $regex: req.params.name, $options: "i" } })
+      .toArray();
+    res.json(movies);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error: " + err);
   }
 });
 
-// READ query: Read all movies with a certain genre
+// READ query 2: Read all movies with a certain genre
 app.get("/movies/genre/:genreName", async (req, res) => {
   try {
     const movies = await db
@@ -198,7 +195,7 @@ app.get("/movies/genre/:genreName", async (req, res) => {
   }
 });
 
-// READ query: Read all movies with a certain genre AND director
+// READ query 3: Read all movies with a certain genre AND a certain director
 app.get("/movies/genre/:genreName/director/:directorName", async (req, res) => {
   try {
     const movies = await db
@@ -209,6 +206,89 @@ app.get("/movies/genre/:genreName/director/:directorName", async (req, res) => {
       })
       .toArray();
     res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+});
+
+// UPDATE query 1: Update the description of a particular movie
+app.put("/movies/:title/description", async (req, res) => {
+  try {
+    const result = await db
+      .collection("movies")
+      .updateOne(
+        { title: req.params.title },
+        { $set: { description: req.body.description } }
+      );
+    if (result.modifiedCount === 0) {
+      res.status(404).send("Movie not found");
+    } else {
+      res.json({ message: "Movie description updated successfully" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+});
+
+// UPDATE query 2: Update the bio of a certain director of multiple movies
+app.put("/directors/:name/bio", async (req, res) => {
+  try {
+    const result = await db
+      .collection("movies")
+      .updateMany(
+        { "director.name": req.params.name },
+        { $set: { "director.bio": req.body.bio } }
+      );
+    if (result.modifiedCount === 0) {
+      res.status(404).send("Director not found");
+    } else {
+      res.json({ message: `Updated bio for ${result.modifiedCount} movies` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+});
+
+// UPDATE query 3: Add a certain movie to a particular user's list of favorites
+app.post("/users/:username/favorites/:movieTitle", async (req, res) => {
+  try {
+    const movie = await db
+      .collection("movies")
+      .findOne({ title: req.params.movieTitle });
+    if (!movie) {
+      return res.status(404).send("Movie not found");
+    }
+    const result = await db
+      .collection("users")
+      .updateOne(
+        { username: req.params.username },
+        { $addToSet: { favoriteMovies: movie._id } }
+      );
+    if (result.modifiedCount === 0) {
+      res.status(404).send("User not found or movie already in favorites");
+    } else {
+      res.json({ message: "Movie added to favorites successfully" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+});
+
+// DELETE query: Delete a certain user by username
+app.delete("/users/:username", async (req, res) => {
+  try {
+    const result = await db
+      .collection("users")
+      .deleteOne({ username: req.params.username });
+    if (result.deletedCount === 0) {
+      res.status(404).send("User not found");
+    } else {
+      res.json({ message: "User deleted successfully" });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).send("Error: " + err);
