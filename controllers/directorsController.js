@@ -1,14 +1,12 @@
-// Import the database connection and ObjectId
-const { getDB } = require("../config/db");
-const { ObjectId } = require("mongodb");
+// controllers/directorsController.js
+
+const mongoose = require("mongoose");
+const Movie = mongoose.model("Movie");
 
 // Get a director by name
 async function getDirectorByName(req, res) {
   try {
-    const db = getDB();
-    const movie = await db
-      .collection("movies")
-      .findOne({ "director.name": req.params.name });
+    const movie = await Movie.findOne({ "director.name": req.params.name });
     if (movie) {
       res.json(movie.director);
     } else {
@@ -23,11 +21,8 @@ async function getDirectorByName(req, res) {
 // Update the bio of a director in multiple movies
 async function updateDirectorBio(req, res) {
   try {
-    const db = getDB();
-    const result = await db.collection("movies").updateMany(
-      {
-        "director.name": { $regex: new RegExp(`^${req.params.name}$`, "i") },
-      },
+    const result = await Movie.updateMany(
+      { "director.name": new RegExp(`^${req.params.name}$`, "i") },
       { $set: { "director.bio": req.body.bio } }
     );
 
@@ -49,11 +44,9 @@ async function updateDirectorBio(req, res) {
 // Get all movies by a director
 async function getMoviesByDirector(req, res) {
   try {
-    const db = getDB();
-    const movies = await db
-      .collection("movies")
-      .find({ "director.name": req.params.directorName })
-      .toArray();
+    const movies = await Movie.find({
+      "director.name": req.params.directorName,
+    });
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -61,35 +54,8 @@ async function getMoviesByDirector(req, res) {
   }
 }
 
-// Add a movie to a director's filmography
-async function addMovieToFilmography(req, res) {
-  try {
-    const db = getDB();
-    const result = await db
-      .collection("directors")
-      .updateOne(
-        { name: req.params.directorName },
-        { $addToSet: { movies: new ObjectId(req.params.movieId) } }
-      );
-    if (result.modifiedCount === 0) {
-      res
-        .status(404)
-        .send("Director not found or movie already in filmography");
-    } else {
-      res.json({
-        message: "Movie added to director's filmography successfully",
-      });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  }
-}
-
-// Export all functions
 module.exports = {
   getDirectorByName,
   updateDirectorBio,
   getMoviesByDirector,
-  addMovieToFilmography,
 };

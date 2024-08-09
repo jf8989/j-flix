@@ -1,13 +1,13 @@
-// Import the database connection and ObjectId
-const { getDB } = require("../config/db");
-const { ObjectId } = require("mongodb");
+// controllers/usersController.js
+
+const mongoose = require("mongoose");
+const User = mongoose.model("User");
 
 // Register a new user
 async function registerUser(req, res) {
   try {
-    const db = getDB();
-    const newUser = req.body;
-    const result = await db.collection("users").insertOne(newUser);
+    const newUser = new User(req.body);
+    const result = await newUser.save();
     res.status(201).json(result);
   } catch (err) {
     console.error(err);
@@ -18,15 +18,15 @@ async function registerUser(req, res) {
 // Update user information
 async function updateUserInfo(req, res) {
   try {
-    const db = getDB();
-    const updatedUser = req.body;
-    const result = await db
-      .collection("users")
-      .updateOne({ username: req.params.username }, { $set: updatedUser });
-    if (result.modifiedCount === 0) {
-      res.status(404).send("User not found");
+    const updatedUser = await User.findOneAndUpdate(
+      { username: req.params.username },
+      { $set: req.body },
+      { new: true }
+    );
+    if (updatedUser) {
+      res.json(updatedUser);
     } else {
-      res.json({ message: "User updated successfully" });
+      res.status(404).send("User not found");
     }
   } catch (err) {
     console.error(err);
@@ -37,17 +37,15 @@ async function updateUserInfo(req, res) {
 // Add a movie to a user's favorites
 async function addMovieToFavorites(req, res) {
   try {
-    const db = getDB();
-    const result = await db
-      .collection("users")
-      .updateOne(
-        { username: req.params.username },
-        { $addToSet: { favoriteMovies: new ObjectId(req.params.movieId) } }
-      );
-    if (result.modifiedCount === 0) {
-      res.status(404).send("User not found or movie already in favorites");
+    const updatedUser = await User.findOneAndUpdate(
+      { username: req.params.username },
+      { $addToSet: { favoriteMovies: req.params.movieId } },
+      { new: true }
+    );
+    if (updatedUser) {
+      res.json(updatedUser);
     } else {
-      res.status(200).send("Movie added to favorites");
+      res.status(404).send("User not found or movie already in favorites");
     }
   } catch (err) {
     console.error(err);
@@ -58,17 +56,15 @@ async function addMovieToFavorites(req, res) {
 // Remove a movie from a user's favorites
 async function removeMovieFromFavorites(req, res) {
   try {
-    const db = getDB();
-    const result = await db
-      .collection("users")
-      .updateOne(
-        { username: req.params.username },
-        { $pull: { favoriteMovies: new ObjectId(req.params.movieId) } }
-      );
-    if (result.modifiedCount === 0) {
-      res.status(404).send("User not found or movie not in favorites");
+    const updatedUser = await User.findOneAndUpdate(
+      { username: req.params.username },
+      { $pull: { favoriteMovies: req.params.movieId } },
+      { new: true }
+    );
+    if (updatedUser) {
+      res.json(updatedUser);
     } else {
-      res.status(200).send("Movie removed from favorites");
+      res.status(404).send("User not found or movie not in favorites");
     }
   } catch (err) {
     console.error(err);
@@ -79,14 +75,13 @@ async function removeMovieFromFavorites(req, res) {
 // Delete a user by username
 async function deleteUser(req, res) {
   try {
-    const db = getDB();
-    const result = await db
-      .collection("users")
-      .deleteOne({ username: req.params.username });
-    if (result.deletedCount === 0) {
-      res.status(404).send("User not found");
-    } else {
+    const deletedUser = await User.findOneAndDelete({
+      username: req.params.username,
+    });
+    if (deletedUser) {
       res.json({ message: "User deleted successfully" });
+    } else {
+      res.status(404).send("User not found");
     }
   } catch (err) {
     console.error(err);
@@ -94,7 +89,6 @@ async function deleteUser(req, res) {
   }
 }
 
-// Export all functions
 module.exports = {
   registerUser,
   updateUserInfo,

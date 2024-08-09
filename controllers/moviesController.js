@@ -1,11 +1,12 @@
-// Import the database connection
-const { getDB } = require("../config/db");
+// controllers/moviesController.js
+
+const mongoose = require('mongoose');
+const Movie = mongoose.model('Movie');
 
 // Get all movies from the database
 async function getAllMovies(req, res) {
   try {
-    const db = getDB();
-    const movies = await db.collection("movies").find().toArray();
+    const movies = await Movie.find();
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -16,10 +17,7 @@ async function getAllMovies(req, res) {
 // Get a movie by its title
 async function getMovieByTitle(req, res) {
   try {
-    const db = getDB();
-    const movie = await db
-      .collection("movies")
-      .findOne({ title: req.params.title });
+    const movie = await Movie.findOne({ title: req.params.title });
     if (movie) {
       res.json(movie);
     } else {
@@ -34,11 +32,7 @@ async function getMovieByTitle(req, res) {
 // Get movies by genre
 async function getMoviesByGenre(req, res) {
   try {
-    const db = getDB();
-    const movies = await db
-      .collection("movies")
-      .find({ "genre.name": req.params.name })
-      .toArray();
+    const movies = await Movie.find({ "genre.name": req.params.name });
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -49,11 +43,7 @@ async function getMoviesByGenre(req, res) {
 // Get movies by actor
 async function getMoviesByActor(req, res) {
   try {
-    const db = getDB();
-    const movies = await db
-      .collection("movies")
-      .find({ actors: req.params.actorName })
-      .toArray();
+    const movies = await Movie.find({ actors: req.params.actorName });
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -64,11 +54,7 @@ async function getMoviesByActor(req, res) {
 // Get movies by release year
 async function getMoviesByYear(req, res) {
   try {
-    const db = getDB();
-    const movies = await db
-      .collection("movies")
-      .find({ releaseYear: parseInt(req.params.year) })
-      .toArray();
+    const movies = await Movie.find({ releaseYear: parseInt(req.params.year) });
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -79,11 +65,7 @@ async function getMoviesByYear(req, res) {
 // Get movies by minimum rating
 async function getMoviesByRating(req, res) {
   try {
-    const db = getDB();
-    const movies = await db
-      .collection("movies")
-      .find({ rating: { $gte: parseFloat(req.params.minRating) } })
-      .toArray();
+    const movies = await Movie.find({ rating: { $gte: parseFloat(req.params.minRating) } });
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -91,7 +73,6 @@ async function getMoviesByRating(req, res) {
   }
 }
 
-// Export all functions
 module.exports = {
   getAllMovies,
   getMovieByTitle,

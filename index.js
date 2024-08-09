@@ -1,18 +1,25 @@
-// Import required modules and configuration
+// index.js
+
 const express = require("express");
 const morgan = require("morgan");
-const dbConfig = require("./config/db"); // MongoDB configuration
+const { connectDB } = require("./config/db");
 const moviesRoutes = require("./routes/movies");
 const usersRoutes = require("./routes/users");
 const directorsRoutes = require("./routes/directors");
 
-// Initialize Express application
+// Import Mongoose models
+require("./models/Movie");
+require("./models/User");
+
 const app = express();
 
+// Connect to MongoDB
+connectDB();
+
 // Middleware setup
-app.use(morgan("common")); // Log HTTP requests
-app.use(express.static("public")); // Serve static files from 'public' directory
-app.use(express.json()); // Parse JSON bodies in requests
+app.use(morgan("common"));
+app.use(express.static("public"));
+app.use(express.json());
 
 // Error handling middleware
 app.use((err, req, res, next) => {
