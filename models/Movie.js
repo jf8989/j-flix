@@ -1,5 +1,3 @@
-// models/Movie.js
-
 const mongoose = require("mongoose");
 
 const MovieSchema = new mongoose.Schema({
@@ -28,4 +26,5 @@ const MovieSchema = new mongoose.Schema({
   rating: Number,
 });
 
+// Export the model
 module.exports = mongoose.model("Movie", MovieSchema);

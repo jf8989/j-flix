@@ -1,7 +1,6 @@
 // controllers/directorsController.js
 
-const mongoose = require("mongoose");
-const Movie = mongoose.model("Movie");
+const Movie = require("../models/Movie");
 
 // Get a director by name
 async function getDirectorByName(req, res) {
@@ -54,6 +53,7 @@ async function getMoviesByDirector(req, res) {
   }
 }
 
+// Export all the functions
 module.exports = {
   getDirectorByName,
   updateDirectorBio,

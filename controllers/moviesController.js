@@ -1,7 +1,7 @@
 // controllers/moviesController.js
 
-const mongoose = require('mongoose');
-const Movie = mongoose.model('Movie');
+const mongoose = require("mongoose");
+const Movie = require("../models/Movie");
 
 // Get all movies from the database
 async function getAllMovies(req, res) {
@@ -65,7 +65,9 @@ async function getMoviesByYear(req, res) {
 // Get movies by minimum rating
 async function getMoviesByRating(req, res) {
   try {
-    const movies = await Movie.find({ rating: { $gte: parseFloat(req.params.minRating) } });
+    const movies = await Movie.find({
+      rating: { $gte: parseFloat(req.params.minRating) },
+    });
     res.json(movies);
   } catch (err) {
     console.error(err);
