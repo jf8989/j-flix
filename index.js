@@ -240,14 +240,12 @@ app.put("/movies/:title/description", async (req, res) => {
 // UPDATE query 2: Update the bio of a certain director of multiple movies
 app.put("/directors/:name/bio", async (req, res) => {
   try {
-    const result = await db
-      .collection("movies")
-      .updateMany(
-        {
-          "director.name": { $regex: new RegExp(`^${req.params.name}$`, "i") },
-        },
-        { $set: { "director.bio": req.body.bio } }
-      );
+    const result = await db.collection("movies").updateMany(
+      {
+        "director.name": { $regex: new RegExp(`^${req.params.name}$`, "i") },
+      },
+      { $set: { "director.bio": req.body.bio } }
+    );
 
     if (result.matchedCount === 0) {
       res.status(404).send("Director not found");
@@ -315,64 +313,82 @@ app.delete("/users/:username", async (req, res) => {
 });
 
 // GET movies by actor
-app.get('/movies/actor/:actorName', async (req, res) => {
+app.get("/movies/actor/:actorName", async (req, res) => {
   try {
-    const movies = await db.collection('movies').find({ actors: req.params.actorName }).toArray();
+    const movies = await db
+      .collection("movies")
+      .find({ actors: req.params.actorName })
+      .toArray();
     res.json(movies);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error: ' + err);
+    res.status(500).send("Error: " + err);
   }
 });
 
 // GET movies by release year
-app.get('/movies/year/:year', async (req, res) => {
+app.get("/movies/year/:year", async (req, res) => {
   try {
-    const movies = await db.collection('movies').find({ releaseYear: parseInt(req.params.year) }).toArray();
+    const movies = await db
+      .collection("movies")
+      .find({ releaseYear: parseInt(req.params.year) })
+      .toArray();
     res.json(movies);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error: ' + err);
+    res.status(500).send("Error: " + err);
   }
 });
 
 // GET movies by minimum rating
-app.get('/movies/rating/:minRating', async (req, res) => {
+app.get("/movies/rating/:minRating", async (req, res) => {
   try {
-    const movies = await db.collection('movies').find({ rating: { $gte: parseFloat(req.params.minRating) } }).toArray();
+    const movies = await db
+      .collection("movies")
+      .find({ rating: { $gte: parseFloat(req.params.minRating) } })
+      .toArray();
     res.json(movies);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error: ' + err);
+    res.status(500).send("Error: " + err);
   }
 });
 
 // GET all movies by a director
-app.get('/directors/:directorName/movies', async (req, res) => {
+app.get("/directors/:directorName/movies", async (req, res) => {
   try {
-    const movies = await db.collection('movies').find({ 'director.name': req.params.directorName }).toArray();
+    const movies = await db
+      .collection("movies")
+      .find({ "director.name": req.params.directorName })
+      .toArray();
     res.json(movies);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error: ' + err);
+    res.status(500).send("Error: " + err);
   }
 });
 
 // UPDATE to add a movie to a director's filmography
-app.put('/directors/:directorName/movies/:movieId', async (req, res) => {
+app.put("/directors/:directorName/movies/:movieId", async (req, res) => {
   try {
-    const result = await db.collection('directors').updateOne(
-      { name: req.params.directorName },
-      { $addToSet: { movies: new ObjectId(req.params.movieId) } }
-    );
+    const result = await db
+      .collection("directors")
+      .updateOne(
+        { name: req.params.directorName },
+        { $addToSet: { movies: new ObjectId(req.params.movieId) } }
+      );
     if (result.modifiedCount === 0) {
-      res.status(404).send('Director not found or movie already in filmography');
+      res
+        .status(404)
+        .send("Director not found or movie already in filmography");
     } else {
-      res.json({ message: 'Movie added to director\'s filmography successfully' });
+      res.json({
+        message: "Movie added to director's filmography successfully",
+      });
     }
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error: ' + err);
+    res.status(500).send("Error: " + err);
   }
 });
 
