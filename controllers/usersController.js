@@ -1,12 +1,20 @@
 // controllers/usersController.js
-
-const mongoose = require("mongoose");
-const User = mongoose.model("User");
+const User = require("../models/User");
 
 // Register a new user
 async function registerUser(req, res) {
   try {
-    const newUser = new User(req.body);
+    const { Username, Password, Email, Birthday } = req.body;
+
+    const hashedPassword = User.hashPassword(Password);
+
+    const newUser = new User({
+      Username: Username,
+      Password: hashedPassword,
+      Email: Email,
+      Birthday: Birthday,
+    });
+
     const result = await newUser.save();
     res.status(201).json(result);
   } catch (err) {
@@ -19,7 +27,7 @@ async function registerUser(req, res) {
 async function updateUserInfo(req, res) {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { username: req.params.username },
+      { Username: req.params.Username },
       { $set: req.body },
       { new: true }
     );
@@ -38,8 +46,8 @@ async function updateUserInfo(req, res) {
 async function addMovieToFavorites(req, res) {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { username: req.params.username },
-      { $addToSet: { favoriteMovies: req.params.movieId } },
+      { Username: req.params.Username },
+      { $addToSet: { FavoriteMovies: req.params.MovieID } },
       { new: true }
     );
     if (updatedUser) {
@@ -57,8 +65,8 @@ async function addMovieToFavorites(req, res) {
 async function removeMovieFromFavorites(req, res) {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { username: req.params.username },
-      { $pull: { favoriteMovies: req.params.movieId } },
+      { Username: req.params.Username },
+      { $pull: { FavoriteMovies: req.params.MovieID } },
       { new: true }
     );
     if (updatedUser) {
@@ -76,7 +84,7 @@ async function removeMovieFromFavorites(req, res) {
 async function deleteUser(req, res) {
   try {
     const deletedUser = await User.findOneAndDelete({
-      username: req.params.username,
+      Username: req.params.Username,
     });
     if (deletedUser) {
       res.json({ message: "User deleted successfully" });
