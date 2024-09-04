@@ -1,26 +1,34 @@
-// users.js
-
-// Import Express and the users controller
+// routes/users.js
 const express = require("express");
 const usersController = require("../controllers/usersController");
+const passport = require("passport");
+require("../passport");
 
-// Create a router instance
 const router = express.Router();
 
-// Route to register a new user
+// Route to register a new user (no authentication required)
 router.post("/", usersController.registerUser);
 
-// Route to update user info
-router.put("/:username", usersController.updateUserInfo);
+// All other routes are protected
+router.put(
+  "/:username",
+  passport.authenticate("jwt", { session: false }),
+  usersController.updateUserInfo
+);
+router.post(
+  "/:username/movies/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  usersController.addMovieToFavorites
+);
+router.delete(
+  "/:username/movies/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  usersController.removeMovieFromFavorites
+);
+router.delete(
+  "/:username",
+  passport.authenticate("jwt", { session: false }),
+  usersController.deleteUser
+);
 
-// Route to add a movie to a user's favorites
-router.post("/:username/movies/:movieId", usersController.addMovieToFavorites);
-
-// Route to remove a movie from a user's favorites
-router.delete("/:username/movies/:movieId", usersController.removeMovieFromFavorites);
-
-// Route to delete a user
-router.delete("/:username", usersController.deleteUser);
-
-// Export the router
 module.exports = router;

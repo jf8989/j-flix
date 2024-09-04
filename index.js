@@ -1,3 +1,4 @@
+// index.js
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose"); // Add this line
@@ -7,12 +8,14 @@ const { connectDB } = require("./config/db");
 require("./models/Movie");
 require("./models/User");
 
+const app = express();
+const express = require("express");
+let auth = require("./auth")(app);
+
 // Import routes after models are registered
 const moviesRoutes = require("./routes/movies");
 const usersRoutes = require("./routes/users");
 const directorsRoutes = require("./routes/directors");
-
-const app = express();
 
 // Connect to MongoDB
 connectDB();
