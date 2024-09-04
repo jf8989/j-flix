@@ -4,22 +4,43 @@ const User = require("../models/User");
 // Register a new user
 async function registerUser(req, res) {
   try {
-    const { Username, Password, Email, Birthday } = req.body;
+    const { username, password, email, birthday } = req.body;
 
-    const hashedPassword = User.hashPassword(Password);
+    // Check if user already exists
+    const existingUser = await User.findOne({
+      $or: [{ Username: username }, { Email: email }],
+    });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Username or Email already exists" });
+    }
+
+    console.log("Password before hashing:", password);
+    const hashedPassword = User.hashPassword(password);
+    console.log("Password after hashing:", hashedPassword);
 
     const newUser = new User({
-      Username: Username,
+      Username: username,
       Password: hashedPassword,
-      Email: Email,
-      Birthday: Birthday,
+      Email: email,
+      Birthday: birthday,
     });
 
-    const result = await newUser.save();
-    res.status(201).json(result);
+    // Save the new user to the database
+    const savedUser = await newUser.save();
+    res.status(201).json({
+      user: {
+        _id: savedUser._id,
+        Username: savedUser.Username,
+        Email: savedUser.Email,
+        Birthday: savedUser.Birthday,
+      },
+      message: "User registered successfully",
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in user registration:", err);
+    res.status(500).json({ message: "Error: " + err.message });
   }
 }
 

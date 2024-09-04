@@ -1,33 +1,42 @@
 // passport.js
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
-const Users = require("./models/User");
+require("dotenv").config();
+
+const passport = require("passport"),
+  LocalStrategy = require("passport-local").Strategy,
+  passportJWT = require("passport-jwt");
+
+// Import the specific models
+const User = require("./models/User");
+
+let JWTStrategy = passportJWT.Strategy,
+  ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "Username",
-      passwordField: "Password",
+      usernameField: "username", // lowercase to match your request
+      passwordField: "password", // lowercase to match your request
     },
     (username, password, callback) => {
-      Users.findOne({ Username: username })
-        .then((user) => {
-          if (!user) {
-            return callback(null, false, {
-              message: "Incorrect username or password.",
-            });
-          }
-          if (!user.validatePassword(password)) {
-            return callback(null, false, { message: "Incorrect password." });
-          }
-          return callback(null, user);
-        })
-        .catch((error) => {
+      console.log(username + "  " + password);
+      User.findOne({ Username: username }, (error, user) => {
+        if (error) {
+          console.log(error);
           return callback(error);
-        });
+        }
+        if (!user) {
+          console.log("incorrect username");
+          return callback(null, false, {
+            message: "Incorrect username or password.",
+          });
+        }
+        if (!user.validatePassword(password)) {
+          console.log("incorrect password");
+          return callback(null, false, { message: "Incorrect password." });
+        }
+        console.log("finished");
+        return callback(null, user);
+      });
     }
   )
 );
@@ -36,10 +45,10 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "your_jwt_secret",
+      secretOrKey: process.env.JWT_SECRET || "your_jwt_secret", // Load secret from .env
     },
     (jwtPayload, callback) => {
-      return Users.findById(jwtPayload._id)
+      return User.findById(jwtPayload._id)
         .then((user) => {
           return callback(null, user);
         })
@@ -49,5 +58,3 @@ passport.use(
     }
   )
 );
-
-module.exports = passport;

@@ -21,12 +21,16 @@ const UserSchema = new mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
 });
 
+// Static method to hash the password
 UserSchema.statics.hashPassword = (password) => {
-  return bcrypt.hashSync(password, 10);
+  return bcrypt.hashSync(password, 10); // Ensure password and salt rounds (10) are provided
 };
 
+// Instance method to validate the password
 UserSchema.methods.validatePassword = function (password) {
-  return bcrypt.compareSync(password, this.Password);
+  return bcrypt.compareSync(password, this.Password); // Compare the plain password to the hashed password
 };
 
-module.exports = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
+
+module.exports = User;

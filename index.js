@@ -10,6 +10,10 @@ require("./models/User");
 
 const app = express();
 let auth = require("./auth")(app);
+const passport = require("passport");
+require("./passport");
+
+app.use(passport.initialize());
 
 // Import routes after models are registered
 const moviesRoutes = require("./routes/movies");
