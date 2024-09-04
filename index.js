@@ -9,7 +9,6 @@ require("./models/Movie");
 require("./models/User");
 
 const app = express();
-const express = require("express");
 let auth = require("./auth")(app);
 
 // Import routes after models are registered
