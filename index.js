@@ -1,7 +1,7 @@
 // index.js
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose"); // Add this line
+const mongoose = require("mongoose");
 const { connectDB } = require("./config/db");
 
 // Import and register models
@@ -9,35 +9,38 @@ require("./models/Movie");
 require("./models/User");
 
 const app = express();
-let auth = require("./auth")(app);
-const passport = require("passport");
-require("./passport");
 
+// **Middleware setup BEFORE routes**
+app.use(morgan("common"));
+app.use(express.static("public"));
+app.use(express.json()); // **Place this before authentication and routes**
+
+// **Passport setup AFTER middleware**
+const passport = require("passport");
+require("./passport"); // Load passport strategies
 app.use(passport.initialize());
+
+// Load auth after passport setup and middleware
+let auth = require("./auth")(app); // Use app to define routes in auth.js
+
+// Connect to MongoDB after middleware is set up
+connectDB();
 
 // Import routes after models are registered
 const moviesRoutes = require("./routes/movies");
 const usersRoutes = require("./routes/users");
 const directorsRoutes = require("./routes/directors");
 
-// Connect to MongoDB
-connectDB();
+// **Define API routes AFTER middleware and Passport are initialized**
+app.use("/movies", moviesRoutes);
+app.use("/users", usersRoutes);
+app.use("/directors", directorsRoutes);
 
-// Middleware setup
-app.use(morgan("common"));
-app.use(express.static("public"));
-app.use(express.json());
-
-// Error handling middleware
+// **Error handling middleware - LAST**
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
-
-// Define API routes
-app.use("/movies", moviesRoutes);
-app.use("/users", usersRoutes);
-app.use("/directors", directorsRoutes);
 
 // Set the port for the server
 const port = 8080;

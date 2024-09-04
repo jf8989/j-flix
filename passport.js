@@ -14,29 +14,36 @@ let JWTStrategy = passportJWT.Strategy,
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "username", // lowercase to match your request
-      passwordField: "password", // lowercase to match your request
+      usernameField: "username", // lowercase to match Postman request
+      passwordField: "password", // lowercase to match Postman request
     },
-    (username, password, callback) => {
-      console.log(username + "  " + password);
-      User.findOne({ Username: username }, (error, user) => {
-        if (error) {
-          console.log(error);
-          return callback(error);
-        }
+    async (username, password, callback) => {
+      try {
+        console.log("Username received for login:", username);
+        console.log("Password received for login:", password);
+
+        // Use async/await with Mongoose
+        const user = await User.findOne({ Username: username });
+
         if (!user) {
-          console.log("incorrect username");
+          console.log("Incorrect username");
           return callback(null, false, {
             message: "Incorrect username or password.",
           });
         }
+
+        // Check if password matches the stored hashed password
         if (!user.validatePassword(password)) {
-          console.log("incorrect password");
+          console.log("Incorrect password");
           return callback(null, false, { message: "Incorrect password." });
         }
-        console.log("finished");
+
+        console.log("Login successful for user:", user.Username);
         return callback(null, user);
-      });
+      } catch (error) {
+        console.log("Error during login:", error);
+        return callback(error);
+      }
     }
   )
 );

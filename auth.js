@@ -14,20 +14,30 @@ function generateJWTToken(user) {
   });
 }
 
-module.exports = (router) => {
-  router.post("/login", (req, res) => {
+module.exports = (app) => {
+  app.post("/login", (req, res) => {
+    console.log("Login request received:", req.body); // Log the request body
+
     passport.authenticate("local", { session: false }, (error, user, info) => {
-      if (error || !user) {
-        return res.status(400).json({
-          message: "Something is not right",
-          user: user,
-        });
+      if (error) {
+        console.log("Login error:", error); // Log any errors
+        return res.status(500).json({ message: "Internal server error" });
       }
-      req.login(user, { session: false }, (error) => {
-        if (error) {
-          res.send(error);
+      if (!user) {
+        console.log("Login failed:", info); // Log why the login failed (user not found or password mismatch)
+        return res
+          .status(400)
+          .json({ message: info.message || "Invalid credentials" });
+      }
+
+      req.login(user, { session: false }, (loginError) => {
+        if (loginError) {
+          console.log("Login callback error:", loginError); // Log callback error
+          return res.status(500).json({ message: "Login process failed" });
         }
-        let token = generateJWTToken(user.toJSON());
+
+        const token = generateJWTToken(user.toJSON());
+        console.log("Login successful, JWT token generated");
         return res.json({ user, token });
       });
     })(req, res);

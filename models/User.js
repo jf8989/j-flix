@@ -28,7 +28,22 @@ UserSchema.statics.hashPassword = (password) => {
 
 // Instance method to validate the password
 UserSchema.methods.validatePassword = function (password) {
-  return bcrypt.compareSync(password, this.Password); // Compare the plain password to the hashed password
+  // Log the hashed password from the database
+  console.log("Hashed password from DB:", this.Password);
+
+  // Log the password provided during login
+  console.log("Password provided for comparison:", password);
+
+  // Compare the provided password with the hashed password
+  const isMatch = bcrypt.compareSync(password, this.Password);
+
+  if (isMatch) {
+    console.log("Passwords match!");
+  } else {
+    console.log("Passwords do NOT match!");
+  }
+
+  return isMatch; // Return true if passwords match, false otherwise
 };
 
 const User = mongoose.model("User", UserSchema);
