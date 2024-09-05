@@ -1,5 +1,7 @@
 // controllers/usersController.js
+const mongoose = require("mongoose");
 const User = require("../models/User");
+const Movie = require("../models/Movie"); // Add this line to import the Movie model
 
 // Register a new user
 async function registerUser(req, res) {
@@ -73,18 +75,39 @@ async function addMovieToFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
 
+    // Log the full request object to see what's being passed
+    console.log("Full Request Params:", req.params);
+
+    // Check if movieID is being received
+    console.log("Movie ID received:", req.params.movieID);
+
+    // Convert the movie ID to ObjectId
+    const movieID = new mongoose.Types.ObjectId(req.params.movieID);
+
+    // Check if the movie exists in the Movie collection
+    const movie = await Movie.findById(movieID);
+
+    if (!movie) {
+      console.log("Movie not found in the database");
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    console.log("Movie found:", movie.title); // Log the found movie details
+
+    // Proceed to update the user's favorite movies
     const updatedUser = await User.findOneAndUpdate(
-      { Username: lowerUsername }, // Query using lowercase username
-      { $addToSet: { FavoriteMovies: req.params.MovieID } },
+      { Username: lowerUsername },
+      { $addToSet: { FavoriteMovies: movieID } },
       { new: true }
     );
+
     if (updatedUser) {
       res.json(updatedUser);
     } else {
       res.status(404).send("User not found or movie already in favorites");
     }
   } catch (err) {
-    console.error(err);
+    console.error("Error adding movie to favorites:", err);
     res.status(500).send("Error: " + err);
   }
 }

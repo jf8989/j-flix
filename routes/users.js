@@ -21,15 +21,17 @@ router.put(
 );
 
 router.post(
-  "/:username/movies/:movieId",
+  "/:username/movies/:movieID",
   passport.authenticate("jwt", { session: false }),
   usersController.addMovieToFavorites
 );
+
 router.delete(
   "/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   usersController.removeMovieFromFavorites
 );
+
 router.delete(
   "/:username",
   passport.authenticate("jwt", { session: false }),
