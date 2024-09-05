@@ -115,20 +115,25 @@ async function addMovieToFavorites(req, res) {
 // Remove a movie from a user's favorites
 async function removeMovieFromFavorites(req, res) {
   try {
-    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+    const lowerUsername = req.params.username.toLowerCase();
+    const movieID = new mongoose.Types.ObjectId(req.params.movieID);
+
+    console.log("Removing movie from favorites:", movieID);
 
     const updatedUser = await User.findOneAndUpdate(
-      { Username: lowerUsername }, // Query using lowercase username
-      { $pull: { FavoriteMovies: req.params.MovieID } },
+      { Username: lowerUsername },
+      { $pull: { FavoriteMovies: movieID } },
       { new: true }
     );
     if (updatedUser) {
+      console.log("Movie removed from favorites:", updatedUser);
       res.json(updatedUser);
     } else {
+      console.log("User or movie not found");
       res.status(404).send("User not found or movie not in favorites");
     }
   } catch (err) {
-    console.error(err);
+    console.error("Error removing movie from favorites:", err);
     res.status(500).send("Error: " + err);
   }
 }
@@ -136,18 +141,21 @@ async function removeMovieFromFavorites(req, res) {
 // Delete a user by username
 async function deleteUser(req, res) {
   try {
-    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+    const lowerUsername = req.params.username.toLowerCase();
+    console.log("Deleting user:", lowerUsername);
 
     const deletedUser = await User.findOneAndDelete({
-      Username: lowerUsername, // Query using lowercase username
+      Username: lowerUsername,
     });
     if (deletedUser) {
+      console.log("User deleted:", deletedUser.Username);
       res.json({ message: "User deleted successfully" });
     } else {
+      console.log("User not found");
       res.status(404).send("User not found");
     }
   } catch (err) {
-    console.error(err);
+    console.error("Error deleting user:", err);
     res.status(500).send("Error: " + err);
   }
 }
