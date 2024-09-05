@@ -6,9 +6,12 @@ async function registerUser(req, res) {
   try {
     const { username, password, email, birthday } = req.body;
 
+    // Convert username to lowercase to avoid case sensitivity issues
+    const lowerUsername = username.toLowerCase();
+
     // Check if user already exists
     const existingUser = await User.findOne({
-      $or: [{ Username: username }, { Email: email }],
+      $or: [{ Username: lowerUsername }, { Email: email }],
     });
     if (existingUser) {
       return res
@@ -21,7 +24,7 @@ async function registerUser(req, res) {
     console.log("Password after hashing:", hashedPassword);
 
     const newUser = new User({
-      Username: username,
+      Username: lowerUsername, // Save username in lowercase
       Password: hashedPassword,
       Email: email,
       Birthday: birthday,
@@ -47,8 +50,10 @@ async function registerUser(req, res) {
 // Update user information
 async function updateUserInfo(req, res) {
   try {
+    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+
     const updatedUser = await User.findOneAndUpdate(
-      { Username: req.params.Username },
+      { Username: lowerUsername }, // Query using lowercase username
       { $set: req.body },
       { new: true }
     );
@@ -66,8 +71,10 @@ async function updateUserInfo(req, res) {
 // Add a movie to a user's favorites
 async function addMovieToFavorites(req, res) {
   try {
+    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+
     const updatedUser = await User.findOneAndUpdate(
-      { Username: req.params.Username },
+      { Username: lowerUsername }, // Query using lowercase username
       { $addToSet: { FavoriteMovies: req.params.MovieID } },
       { new: true }
     );
@@ -85,8 +92,10 @@ async function addMovieToFavorites(req, res) {
 // Remove a movie from a user's favorites
 async function removeMovieFromFavorites(req, res) {
   try {
+    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+
     const updatedUser = await User.findOneAndUpdate(
-      { Username: req.params.Username },
+      { Username: lowerUsername }, // Query using lowercase username
       { $pull: { FavoriteMovies: req.params.MovieID } },
       { new: true }
     );
@@ -104,8 +113,10 @@ async function removeMovieFromFavorites(req, res) {
 // Delete a user by username
 async function deleteUser(req, res) {
   try {
+    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+
     const deletedUser = await User.findOneAndDelete({
-      Username: req.params.Username,
+      Username: lowerUsername, // Query using lowercase username
     });
     if (deletedUser) {
       res.json({ message: "User deleted successfully" });
