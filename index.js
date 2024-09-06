@@ -44,8 +44,8 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
-// Set the port for the server
-const port = 8080;
-app.listen(port, () => {
+// Set the port for the server, using Heroku's dynamic port or 8080 for local development
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
   console.log(`j-Flix server is running on port ${port}`);
 });
