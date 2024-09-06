@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const { connectDB } = require("./config/db");
+const cors = require("cors"); // Import CORS package
 
 // Import and register models
 require("./models/Movie");
@@ -14,6 +15,7 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.json()); // **Place this before authentication and routes**
+app.use(cors()); // **Enable CORS for all domains - Step 1**
 
 // **Passport setup AFTER middleware**
 const passport = require("passport");
