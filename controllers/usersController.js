@@ -2,13 +2,18 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Movie = require("../models/Movie"); // Add this line to import the Movie model
+const { validationResult } = require("express-validator"); // Add validation result handling
 
 // Register a new user
 async function registerUser(req, res) {
+  // Check for validation errors
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   try {
     const { username, password, email, birthday } = req.body;
-
-    // Convert username to lowercase to avoid case sensitivity issues
     const lowerUsername = username.toLowerCase();
 
     // Check if user already exists
@@ -21,18 +26,15 @@ async function registerUser(req, res) {
         .json({ message: "Username or Email already exists" });
     }
 
-    console.log("Password before hashing:", password);
     const hashedPassword = User.hashPassword(password);
-    console.log("Password after hashing:", hashedPassword);
 
     const newUser = new User({
-      Username: lowerUsername, // Save username in lowercase
+      Username: lowerUsername,
       Password: hashedPassword,
       Email: email,
       Birthday: birthday,
     });
 
-    // Save the new user to the database
     const savedUser = await newUser.save();
     res.status(201).json({
       user: {
@@ -44,18 +46,23 @@ async function registerUser(req, res) {
       message: "User registered successfully",
     });
   } catch (err) {
-    console.error("Error in user registration:", err);
     res.status(500).json({ message: "Error: " + err.message });
   }
 }
 
 // Update user information
 async function updateUserInfo(req, res) {
+  // Check for validation errors
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   try {
-    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+    const lowerUsername = req.params.username.toLowerCase();
 
     const updatedUser = await User.findOneAndUpdate(
-      { Username: lowerUsername }, // Query using lowercase username
+      { Username: lowerUsername },
       { $set: req.body },
       { new: true }
     );
@@ -65,7 +72,6 @@ async function updateUserInfo(req, res) {
       res.status(404).send("User not found");
     }
   } catch (err) {
-    console.error(err);
     res.status(500).send("Error: " + err);
   }
 }
