@@ -49,3 +49,5 @@ const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log(`j-Flix server is running on port ${port}`);
 });
+
+module.exports = app; // Export the app to be used by Vercel
