@@ -11,5 +11,9 @@
       "src": "/(.*)",
       "dest": "index.js"
     }
-  ]
+  ],
+  "github": {
+    "enabled": false
+  },
+  "ignoreCommand": "exit 0"
 }

@@ -10,14 +10,13 @@ const uri =
 
 async function connectDB() {
   try {
-    // Connect to the MongoDB database
-    await mongoose.connect(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // Connect to the MongoDB database (Removed useNewUrlParser and useUnifiedTopology)
+    await mongoose.connect(uri, { dbName: "myFlixDB" });
     console.log(
       `Connected successfully to MongoDB using Mongoose (${process.env.NODE_ENV})`
     );
+
+    console.log(`Connecting to MongoDB URI: ${uri}`);
 
     // Only drop the users collection in development mode
     if (process.env.NODE_ENV === "development") {
