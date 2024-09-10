@@ -2,7 +2,6 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const { connectDB } = require("./config/db");
 const cors = require("cors"); // Import CORS package
 
 // Import and register models
@@ -25,8 +24,14 @@ app.use(passport.initialize());
 // Load auth after passport setup and middleware
 let auth = require("./auth")(app); // Use app to define routes in auth.js
 
-// Connect to MongoDB after middleware is set up
-connectDB();
+// **MongoDB connection** (using MONGODB_URI from environment variables)
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.log("Error connecting to MongoDB: ", err));
 
 // Import routes after models are registered
 const moviesRoutes = require("./routes/movies");
@@ -44,7 +49,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
-// Set the port for the server, using Heroku's dynamic port or 8080 for local development
+// Set the port for the server, using Vercel's or local development port
 const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log(`j-Flix server is running on port ${port}`);

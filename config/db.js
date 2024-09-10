@@ -2,13 +2,22 @@
 const mongoose = require("mongoose");
 require("dotenv").config(); // Load environment variables from .env file
 
-const uri = "mongodb://localhost:27017/myFlixDB";
+// Use the correct MongoDB URI based on the environment
+const uri =
+  process.env.NODE_ENV === "development"
+    ? "mongodb://localhost:27017/myFlixDB" // Local DB for development
+    : process.env.MONGODB_URI; // MongoDB Atlas for production
 
 async function connectDB() {
   try {
     // Connect to the MongoDB database
-    await mongoose.connect(uri);
-    console.log("Connected successfully to MongoDB using Mongoose");
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(
+      `Connected successfully to MongoDB using Mongoose (${process.env.NODE_ENV})`
+    );
 
     // Only drop the users collection in development mode
     if (process.env.NODE_ENV === "development") {
