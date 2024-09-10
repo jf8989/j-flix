@@ -1,3 +1,6 @@
 node_modules/
 .env
 .vercel
+movies.json
+users.json
+directors.json
