@@ -14,21 +14,24 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.json());
-// Replace the simple cors() with this more specific configuration
+const cors = require("cors");
+
 let allowedOrigins = [
   "http://localhost:1234",
-  "https://your-production-domain.com",
+  "https://your-react-app-domain.com",
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          "The CORS policy for this application doesn't allow access from origin " +
-          origin;
-        return callback(new Error(message), false);
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
       }
       return callback(null, true);
     },
@@ -37,7 +40,7 @@ app.use(
   })
 );
 
-// Add this line for CORS preflight
+// Enable pre-flight across-the-board
 app.options("*", cors());
 
 // Passport setup
