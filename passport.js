@@ -14,16 +14,19 @@ let JWTStrategy = passportJWT.Strategy,
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "username", // lowercase to match Postman request
-      passwordField: "password", // lowercase to match Postman request
+      usernameField: "username", // Field names in the request body
+      passwordField: "password",
     },
     async (username, password, callback) => {
       try {
+        // Convert username to lowercase
+        const lowerUsername = username.toLowerCase();
         console.log("Username received for login:", username);
         console.log("Password received for login:", password);
+        console.log("Username converted to lowercase:", lowerUsername);
 
-        // Use async/await with Mongoose
-        const user = await User.findOne({ Username: username });
+        // Find user with lowercase username
+        const user = await User.findOne({ Username: lowerUsername });
 
         if (!user) {
           console.log("Incorrect username");
@@ -54,14 +57,18 @@ passport.use(
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.JWT_SECRET || "your_jwt_secret", // Load secret from .env
     },
-    (jwtPayload, callback) => {
-      return User.findById(jwtPayload._id)
-        .then((user) => {
+    async (jwtPayload, callback) => {
+      try {
+        // Find the user specified in token
+        const user = await User.findById(jwtPayload._id);
+        if (user) {
           return callback(null, user);
-        })
-        .catch((error) => {
-          return callback(error);
-        });
+        } else {
+          return callback(null, false);
+        }
+      } catch (error) {
+        return callback(error, false);
+      }
     }
   )
 );
