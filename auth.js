@@ -16,23 +16,26 @@ function generateJWTToken(user) {
 
 module.exports = (app) => {
   app.post("/login", (req, res) => {
-    console.log("Login request received:", req.body); // Log the request body
+    console.log("Login request received:", req.body);
 
     passport.authenticate("local", { session: false }, (error, user, info) => {
+      console.log("Passport authenticate callback reached");
       if (error) {
-        console.log("Login error:", error); // Log any errors
+        console.log("Login error:", error);
         return res.status(500).json({ message: "Internal server error" });
       }
       if (!user) {
-        console.log("Login failed:", info); // Log why the login failed (user not found or password mismatch)
+        console.log("Login failed:", info);
         return res
           .status(400)
           .json({ message: info.message || "Invalid credentials" });
       }
 
+      console.log("User authenticated successfully:", user.Username);
+
       req.login(user, { session: false }, (loginError) => {
         if (loginError) {
-          console.log("Login callback error:", loginError); // Log callback error
+          console.log("Login callback error:", loginError);
           return res.status(500).json({ message: "Login process failed" });
         }
 
