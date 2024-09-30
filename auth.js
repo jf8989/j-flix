@@ -16,7 +16,9 @@ function generateJWTToken(user) {
 
 module.exports = (app) => {
   app.post("/login", (req, res) => {
+    console.log("Login request received");
     console.log("Login request received:", req.body);
+    console.log("Login request headers:", req.headers);
 
     passport.authenticate("local", { session: false }, (error, user, info) => {
       console.log("Passport authenticate callback reached");

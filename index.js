@@ -15,25 +15,9 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.json());
 
-let allowedOrigins = [
-  "http://localhost:1234",
-  "https://your-react-app-domain.com",
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // allow requests with no origin
-      // (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        var msg =
-          "The CORS policy for this site does not " +
-          "allow access from the specified Origin.";
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -58,6 +42,11 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.log("Error connecting to MongoDB: ", err));
+
+app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.path, req.headers.origin);
+  next();
+});
 
 // Import routes
 const moviesRoutes = require("./routes/movies");
