@@ -4,24 +4,6 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-let allowedOrigins = ["http://localhost:1234"];
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        let message =
-          "The CORS policy for this application doesn't allow access from origin " +
-          origin +
-          ".";
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    },
-  })
-);
-
 // Import and register models
 require("./models/Movie");
 require("./models/User");
@@ -32,7 +14,31 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.json());
-app.use(cors());
+// Replace the simple cors() with this more specific configuration
+let allowedOrigins = [
+  "http://localhost:1234",
+  "https://your-production-domain.com",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        let message =
+          "The CORS policy for this application doesn't allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Add this line for CORS preflight
+app.options("*", cors());
 
 // Passport setup
 const passport = require("passport");
