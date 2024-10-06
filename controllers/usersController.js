@@ -50,7 +50,7 @@ async function registerUser(req, res) {
   }
 }
 
-// Update user information
+// Update user information (partial updates)
 async function updateUserInfo(req, res) {
   // Check for validation errors
   let errors = validationResult(req);
@@ -61,11 +61,22 @@ async function updateUserInfo(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
 
+    // Ensure req.body only has fields that need updating
+    const updatedFields = {};
+    if (req.body.username)
+      updatedFields.Username = req.body.username.toLowerCase();
+    if (req.body.password)
+      updatedFields.Password = User.hashPassword(req.body.password);
+    if (req.body.email) updatedFields.Email = req.body.email;
+    if (req.body.birthday) updatedFields.Birthday = new Date(req.body.birthday);
+
+    // Perform the update using only the updatedFields
     const updatedUser = await User.findOneAndUpdate(
       { Username: lowerUsername },
-      { $set: req.body },
+      { $set: updatedFields }, // Only update the fields passed in req.body
       { new: true }
     );
+
     if (updatedUser) {
       res.json(updatedUser);
     } else {
