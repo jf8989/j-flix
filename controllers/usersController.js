@@ -122,18 +122,20 @@ async function addMovieToFavorites(req, res) {
 async function removeMovieFromFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
-    const movieID = new mongoose.Types.ObjectId(req.params.movieID);
+    const movieID = new mongoose.Types.ObjectId(req.params.movieID); // This conversion is crucial!
 
-    console.log("Removing movie from favorites:", movieID);
+    console.log("Removing movie from favorites:", movieID); // Should print as an ObjectId, not string
 
+    // Query to remove the movie from FavoriteMovies array in user's document
     const updatedUser = await User.findOneAndUpdate(
       { Username: lowerUsername },
-      { $pull: { FavoriteMovies: movieID } },
-      { new: true }
+      { $pull: { FavoriteMovies: movieID } }, // Use '$pull' to remove based on ObjectId
+      { new: true } // Return the updated document
     );
+
     if (updatedUser) {
       console.log("Movie removed from favorites:", updatedUser);
-      res.json(updatedUser);
+      res.json(updatedUser); // Send the updated user back
     } else {
       console.log("User or movie not found");
       res.status(404).send("User not found or movie not in favorites");
