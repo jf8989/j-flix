@@ -2,11 +2,27 @@
 
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");
+const TMDBService = require("../utils/tmdb");
 
 // Get all movies from the database
 async function getAllMovies(req, res) {
   try {
     const movies = await Movie.find();
+
+    // Update any movies missing images
+    for (const movie of movies) {
+      if (!movie.imageURL || movie.imageURL.includes("placeholder")) {
+        const tmdbData = await TMDBService.searchMovie(
+          movie.title,
+          movie.releaseYear
+        );
+        if (tmdbData && tmdbData.imageURL) {
+          movie.imageURL = tmdbData.imageURL;
+          await movie.save();
+        }
+      }
+    }
+
     res.json(movies);
   } catch (err) {
     console.error(err);
@@ -19,6 +35,17 @@ async function getMovieByTitle(req, res) {
   try {
     const movie = await Movie.findOne({ title: req.params.title });
     if (movie) {
+      // Update image if needed
+      if (!movie.imageURL || movie.imageURL.includes("placeholder")) {
+        const tmdbData = await TMDBService.searchMovie(
+          movie.title,
+          movie.releaseYear
+        );
+        if (tmdbData && tmdbData.imageURL) {
+          movie.imageURL = tmdbData.imageURL;
+          await movie.save();
+        }
+      }
       res.json(movie);
     } else {
       res.status(404).send("Movie not found");
