@@ -7,26 +7,42 @@ const TMDBService = require("../utils/tmdb");
 // Get all movies from the database
 async function getAllMovies(req, res) {
   try {
+    // First, just get the movies without TMDB updates
     const movies = await Movie.find();
 
-    // Update any movies missing images
-    for (const movie of movies) {
-      if (!movie.imageURL || movie.imageURL.includes("placeholder")) {
-        const tmdbData = await TMDBService.searchMovie(
-          movie.title,
-          movie.releaseYear
-        );
-        if (tmdbData && tmdbData.imageURL) {
-          movie.imageURL = tmdbData.imageURL;
-          await movie.save();
-        }
-      }
+    if (!movies || movies.length === 0) {
+      return res.json([]);
     }
 
+    // Send initial response
     res.json(movies);
+
+    // Update TMDB images in background
+    movies.forEach(async (movie) => {
+      try {
+        if (!movie.imageURL || movie.imageURL.includes("placeholder")) {
+          const tmdbData = await TMDBService.searchMovie(
+            movie.title,
+            movie.releaseYear
+          );
+          if (tmdbData?.imageURL) {
+            await Movie.findByIdAndUpdate(
+              movie._id,
+              { imageURL: tmdbData.imageURL },
+              { new: true }
+            );
+          }
+        }
+      } catch (tmdbError) {
+        console.error(`TMDB update error for ${movie.title}:`, tmdbError);
+      }
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getAllMovies:", err);
+    res.status(500).json({
+      message: "Error fetching movies",
+      error: err.message,
+    });
   }
 }
 
@@ -34,25 +50,16 @@ async function getAllMovies(req, res) {
 async function getMovieByTitle(req, res) {
   try {
     const movie = await Movie.findOne({ title: req.params.title });
-    if (movie) {
-      // Update image if needed
-      if (!movie.imageURL || movie.imageURL.includes("placeholder")) {
-        const tmdbData = await TMDBService.searchMovie(
-          movie.title,
-          movie.releaseYear
-        );
-        if (tmdbData && tmdbData.imageURL) {
-          movie.imageURL = tmdbData.imageURL;
-          await movie.save();
-        }
-      }
-      res.json(movie);
-    } else {
-      res.status(404).send("Movie not found");
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
     }
+    res.json(movie);
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getMovieByTitle:", err);
+    res.status(500).json({
+      message: "Error fetching movie",
+      error: err.message,
+    });
   }
 }
 
@@ -60,10 +67,13 @@ async function getMovieByTitle(req, res) {
 async function getMoviesByGenre(req, res) {
   try {
     const movies = await Movie.find({ "genre.name": req.params.name });
-    res.json(movies);
+    res.json(movies || []); // Return empty array if no movies found
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getMoviesByGenre:", err);
+    res.status(500).json({
+      message: "Error fetching movies by genre",
+      error: err.message,
+    });
   }
 }
 
@@ -71,10 +81,13 @@ async function getMoviesByGenre(req, res) {
 async function getMoviesByActor(req, res) {
   try {
     const movies = await Movie.find({ actors: req.params.actorName });
-    res.json(movies);
+    res.json(movies || []); // Return empty array if no movies found
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getMoviesByActor:", err);
+    res.status(500).json({
+      message: "Error fetching movies by actor",
+      error: err.message,
+    });
   }
 }
 
@@ -82,10 +95,13 @@ async function getMoviesByActor(req, res) {
 async function getMoviesByYear(req, res) {
   try {
     const movies = await Movie.find({ releaseYear: parseInt(req.params.year) });
-    res.json(movies);
+    res.json(movies || []); // Return empty array if no movies found
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getMoviesByYear:", err);
+    res.status(500).json({
+      message: "Error fetching movies by year",
+      error: err.message,
+    });
   }
 }
 
@@ -95,10 +111,13 @@ async function getMoviesByRating(req, res) {
     const movies = await Movie.find({
       rating: { $gte: parseFloat(req.params.minRating) },
     });
-    res.json(movies);
+    res.json(movies || []); // Return empty array if no movies found
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error: " + err);
+    console.error("Error in getMoviesByRating:", err);
+    res.status(500).json({
+      message: "Error fetching movies by rating",
+      error: err.message,
+    });
   }
 }
 
