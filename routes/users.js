@@ -35,13 +35,13 @@ router.put(
 );
 
 router.post(
-  "/:username/movies/:movieID",
+  "/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   usersController.addMovieToFavorites
 );
 
 router.delete(
-  "/:username/movies/:movieID",
+  "/:username/movies/:movieId",
   passport.authenticate("jwt", { session: false }),
   usersController.removeMovieFromFavorites
 );
