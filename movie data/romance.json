@@ -1,0 +1,242 @@
+[
+    {
+        "_id": { "$oid": "76d26925aa1cc61ab9e6ff01" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "James Cameron",
+            "bio": "Canadian filmmaker known for his expertise in visual effects and epic storytelling.",
+            "birthYear": 1954
+        },
+        "title": "Titanic",
+        "description": "A young aristocrat falls in love with a kind but poor artist aboard the luxurious R.M.S. Titanic.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Titanic",
+        "featured": true,
+        "actors": [
+            "Leonardo DiCaprio",
+            "Kate Winslet",
+            "Billy Zane",
+            "Kathy Bates"
+        ],
+        "rating": 7.9,
+        "releaseYear": 1997
+    },
+    {
+        "_id": { "$oid": "86e37935bb2dd72bc9f7gg02" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Richard Curtis",
+            "bio": "British filmmaker known for his work on romantic comedies.",
+            "birthYear": 1956
+        },
+        "title": "Notting Hill",
+        "description": "The life of a simple bookshop owner changes when he meets the most famous film star in the world.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Notting+Hill",
+        "featured": true,
+        "actors": [
+            "Hugh Grant",
+            "Julia Roberts",
+            "Rhys Ifans",
+            "Emma Chambers"
+        ],
+        "rating": 7.1,
+        "releaseYear": 1999
+    },
+    {
+        "_id": { "$oid": "97f48945cc3ff83cc1g8hh03" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Nick Cassavetes",
+            "bio": "American filmmaker known for his romantic dramas.",
+            "birthYear": 1959
+        },
+        "title": "The Notebook",
+        "description": "A poor yet passionate young man falls in love with a rich young woman, giving her a sense of freedom.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Notebook",
+        "featured": true,
+        "actors": [
+            "Ryan Gosling",
+            "Rachel McAdams",
+            "James Garner",
+            "Gena Rowlands"
+        ],
+        "rating": 7.8,
+        "releaseYear": 2004
+    },
+    {
+        "_id": { "$oid": "a8g59955dd4gg94dc2i9jj04" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Gary Marshall",
+            "bio": "American filmmaker known for his classic romantic comedies.",
+            "birthYear": 1934
+        },
+        "title": "Pretty Woman",
+        "description": "A wealthy businessman and a spirited escort form an unexpected bond that transcends their differences.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Pretty+Woman",
+        "featured": true,
+        "actors": [
+            "Richard Gere",
+            "Julia Roberts",
+            "Jason Alexander",
+            "Hector Elizondo"
+        ],
+        "rating": 7.0,
+        "releaseYear": 1990
+    },
+    {
+        "_id": { "$oid": "b9h60965ee5hh15ef3j0kk05" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "John Carney",
+            "bio": "Irish filmmaker known for his musical romance dramas.",
+            "birthYear": 1972
+        },
+        "title": "Once",
+        "description": "A modern-day musical about a busker and an immigrant who embark on a passionate but complicated romance.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Once",
+        "featured": false,
+        "actors": [
+            "Glen Hansard",
+            "Markéta Irglová",
+            "Hugh Walsh",
+            "Gerard Hendrick"
+        ],
+        "rating": 7.8,
+        "releaseYear": 2007
+    },
+    {
+        "_id": { "$oid": "c0i71975ff6ii26gg4l1ll06" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Michel Gondry",
+            "bio": "French director known for his surreal and visually imaginative style.",
+            "birthYear": 1963
+        },
+        "title": "Eternal Sunshine of the Spotless Mind",
+        "description": "A couple undergoes a medical procedure to erase each other from their memories when their relationship turns sour.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Eternal+Sunshine",
+        "featured": true,
+        "actors": [
+            "Jim Carrey",
+            "Kate Winslet",
+            "Kirsten Dunst",
+            "Mark Ruffalo"
+        ],
+        "rating": 8.3,
+        "releaseYear": 2004
+    },
+    {
+        "_id": { "$oid": "d1j82985gg7jj37hh5m2mm07" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Rob Reiner",
+            "bio": "American director known for his heartfelt and timeless romantic films.",
+            "birthYear": 1947
+        },
+        "title": "When Harry Met Sally...",
+        "description": "Harry and Sally develop a close friendship over the years, but can men and women be just friends?",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=When+Harry+Met+Sally",
+        "featured": true,
+        "actors": [
+            "Billy Crystal",
+            "Meg Ryan",
+            "Carrie Fisher",
+            "Bruno Kirby"
+        ],
+        "rating": 7.6,
+        "releaseYear": 1989
+    },
+    {
+        "_id": { "$oid": "e2k93995hh8kk48ii6n3nn08" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Joe Wright",
+            "bio": "British director known for his visually lush period dramas.",
+            "birthYear": 1972
+        },
+        "title": "Pride & Prejudice",
+        "description": "The love story between Elizabeth Bennet and Mr. Darcy unfolds amid the rigid social structures of 19th-century England.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Pride+&+Prejudice",
+        "featured": true,
+        "actors": [
+            "Keira Knightley",
+            "Matthew Macfadyen",
+            "Brenda Blethyn",
+            "Donald Sutherland"
+        ],
+        "rating": 7.8,
+        "releaseYear": 2005
+    },
+    {
+        "_id": { "$oid": "f3l04905ii9ll59jj7o4oo09" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Baz Luhrmann",
+            "bio": "Australian director known for his extravagant and vibrant style.",
+            "birthYear": 1962
+        },
+        "title": "Moulin Rouge!",
+        "description": "A poet falls for a beautiful courtesan at the infamous Parisian nightclub Moulin Rouge.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Moulin+Rouge",
+        "featured": true,
+        "actors": [
+            "Nicole Kidman",
+            "Ewan McGregor",
+            "John Leguizamo",
+            "Jim Broadbent"
+        ],
+        "rating": 7.6,
+        "releaseYear": 2001
+    },
+    {
+        "_id": { "$oid": "g4m15915jj0mm60kk8p5pp10" },
+        "genre": {
+            "name": "Romance",
+            "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
+        },
+        "director": {
+            "name": "Peter Weir",
+            "bio": "Australian director known for his thought-provoking and humanistic approach to storytelling.",
+            "birthYear": 1944
+        },
+        "title": "Witness",
+        "description": "A detective and an Amish widow share a forbidden love while hiding from a corrupt gang in rural Pennsylvania.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Witness",
+        "featured": false,
+        "actors": [
+            "Harrison Ford",
+            "Kelly McGillis",
+            "Josef Sommer",
+            "Lukas Haas"
+        ],
+        "rating": 7.4,
+        "releaseYear": 1985
+    }
+]

@@ -1,0 +1,171 @@
+[
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd31" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Steven Spielberg",
+            "bio": "Renowned American filmmaker known for his diverse and influential body of work.",
+            "birthYear": 1946
+        },
+        "title": "Schindler's List",
+        "description": "The true story of Oskar Schindler, a German businessman who saved over a thousand Polish Jews during the Holocaust.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Schindler's+List",
+        "featured": true,
+        "actors": [
+            "Liam Neeson",
+            "Ralph Fiennes",
+            "Ben Kingsley",
+            "Caroline Goodall"
+        ],
+        "rating": 9.0,
+        "releaseYear": 1993
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd32" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Ron Howard",
+            "bio": "American director and producer known for his work in both film and television.",
+            "birthYear": 1954
+        },
+        "title": "A Beautiful Mind",
+        "description": "The story of John Nash, a brilliant mathematician who struggles with schizophrenia while making groundbreaking contributions to his field.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=A+Beautiful+Mind",
+        "featured": true,
+        "actors": [
+            "Russell Crowe",
+            "Jennifer Connelly",
+            "Ed Harris",
+            "Paul Bettany"
+        ],
+        "rating": 8.2,
+        "releaseYear": 2001
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd33" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "David Fincher",
+            "bio": "American director known for his dark and stylish thrillers.",
+            "birthYear": 1962
+        },
+        "title": "The Social Network",
+        "description": "The story of the founding of Facebook and the legal battles that followed its success.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Social+Network",
+        "featured": true,
+        "actors": [
+            "Jesse Eisenberg",
+            "Andrew Garfield",
+            "Justin Timberlake",
+            "Armie Hammer"
+        ],
+        "rating": 7.8,
+        "releaseYear": 2010
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd34" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Milos Forman",
+            "bio": "Czech-American director known for his work on critically acclaimed films.",
+            "birthYear": 1932
+        },
+        "title": "Amadeus",
+        "description": "A fictionalized account of the life of Wolfgang Amadeus Mozart, as told by his rival Antonio Salieri.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Amadeus",
+        "featured": true,
+        "actors": [
+            "F. Murray Abraham",
+            "Tom Hulce",
+            "Elizabeth Berridge",
+            "Roy Dotrice"
+        ],
+        "rating": 8.4,
+        "releaseYear": 1984
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd35" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Martin Scorsese",
+            "bio": "American director known for his work on crime films and collaborations with actor Robert De Niro.",
+            "birthYear": 1942
+        },
+        "title": "Raging Bull",
+        "description": "The life of boxer Jake LaMotta, whose violence and temper led him to the top in the ring but destroyed his life outside of it.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Raging+Bull",
+        "featured": true,
+        "actors": [
+            "Robert De Niro",
+            "Cathy Moriarty",
+            "Joe Pesci",
+            "Frank Vincent"
+        ],
+        "rating": 8.2,
+        "releaseYear": 1980
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd36" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Spike Lee",
+            "bio": "American filmmaker known for his films that explore race relations and political issues.",
+            "birthYear": 1957
+        },
+        "title": "Malcolm X",
+        "description": "The biographical epic of the controversial and influential Black Nationalist leader, Malcolm X.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Malcolm+X",
+        "featured": true,
+        "actors": [
+            "Denzel Washington",
+            "Angela Bassett",
+            "Albert Hall",
+            "Al Freeman Jr."
+        ],
+        "rating": 7.7,
+        "releaseYear": 1992
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd37" },
+        "genre": {
+            "name": "Biography",
+            "description": "Films that depict the lives of real people, focusing on their personal and professional experiences."
+        },
+        "director": {
+            "name": "Roman Polanski",
+            "bio": "Polish-French film director known for his eclectic and controversial films.",
+            "birthYear": 1933
+        },
+        "title": "The Pianist",
+        "description": "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto during World War II.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Pianist",
+        "featured": true,
+"actors": [
+    "Adrien Brody",
+    "Thomas Kretschmann",
+    "Frank Finlay",
+    "Maureen Lipman"
+],
+"rating": 8.5,
+"releaseYear": 2002
+}
+]
+ 

@@ -1,0 +1,192 @@
+[
+    {
+      "_id": { "$oid": "76c14925df1dd72ec9e6ee31" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "John McTiernan",
+        "bio": "American director known for his action-packed thrillers",
+        "birthYear": 1951
+      },
+      "title": "Die Hard",
+      "description": "A New York cop fights to save hostages from terrorists in a Los Angeles skyscraper.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Die+Hard",
+      "featured": true,
+      "actors": ["Bruce Willis", "Alan Rickman", "Bonnie Bedelia", "Reginald VelJohnson"],
+      "rating": 8.2,
+      "releaseYear": 1988
+    },
+    {
+      "_id": { "$oid": "a8d35925bf4ee63ed8f7aa52" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "Kathryn Bigelow",
+        "bio": "American director known for her tense action dramas",
+        "birthYear": 1951
+      },
+      "title": "Point Break",
+      "description": "An FBI agent goes undercover to catch a gang of bank robbers who may also be extreme surfers.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Point+Break",
+      "featured": false,
+      "actors": ["Keanu Reeves", "Patrick Swayze", "Gary Busey", "Lori Petty"],
+      "rating": 7.3,
+      "releaseYear": 1991
+    },
+    {
+      "_id": { "$oid": "b7e46935cf9ff83fd1f8cc83" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "John Woo",
+        "bio": "Hong Kong director known for his stylized action sequences",
+        "birthYear": 1946
+      },
+      "title": "Face/Off",
+      "description": "An FBI agent undergoes a face transplant to foil a terrorist's plan, only for the terrorist to assume his identity.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Face/Off",
+      "featured": false,
+      "actors": ["John Travolta", "Nicolas Cage", "Joan Allen", "Alessandro Nivola"],
+      "rating": 7.2,
+      "releaseYear": 1997
+    },
+    {
+      "_id": { "$oid": "c8f57945af6gg94ge2g9dd94" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "George Miller",
+        "bio": "Australian director known for his Mad Max series",
+        "birthYear": 1945
+      },
+      "title": "Mad Max: Fury Road",
+      "description": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search of her homeland with the help of a drifter named Max.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Fury+Road",
+      "featured": true,
+      "actors": ["Tom Hardy", "Charlize Theron", "Nicholas Hoult", "Hugh Keays-Byrne"],
+      "rating": 8.1,
+      "releaseYear": 2015
+    },
+    {
+      "_id": { "$oid": "d9g68955cf7hh05hf3h0eea5" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "Guy Ritchie",
+        "bio": "British director known for his dynamic crime films",
+        "birthYear": 1968
+      },
+      "title": "Snatch",
+      "description": "The search for a stolen diamond leads to an intertwined set of criminals, fighters, and gangsters.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Snatch",
+      "featured": false,
+      "actors": ["Jason Statham", "Brad Pitt", "Benicio Del Toro", "Dennis Farina"],
+      "rating": 8.3,
+      "releaseYear": 2000
+    },
+    {
+      "_id": { "$oid": "e0h79965af8ii16ig4i1ffa6" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "Martin Campbell",
+        "bio": "British-New Zealand director known for his Bond films",
+        "birthYear": 1943
+      },
+      "title": "Casino Royale",
+      "description": "James Bond's first mission leads him to a high-stakes poker game at Casino Royale, where he must thwart a terrorist financier.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Casino+Royale",
+      "featured": true,
+      "actors": ["Daniel Craig", "Eva Green", "Mads Mikkelsen", "Judi Dench"],
+      "rating": 8.0,
+      "releaseYear": 2006
+    },
+    {
+      "_id": { "$oid": "f1i89975df9jj27jh5j2ggb7" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "John Wick",
+        "bio": "American filmmaker known for his stylish action sequences",
+        "birthYear": 1970
+      },
+      "title": "John Wick",
+      "description": "An ex-hitman comes out of retirement to track down the gangsters that took everything from him.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=John+Wick",
+      "featured": true,
+      "actors": ["Keanu Reeves", "Michael Nyqvist", "Alfie Allen", "Willem Dafoe"],
+      "rating": 7.4,
+      "releaseYear": 2014
+    },
+    {
+      "_id": { "$oid": "g2j90985eg0kk38ki6k3hhc8" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "Robert Rodriguez",
+        "bio": "American filmmaker known for his innovative low-budget techniques",
+        "birthYear": 1968
+      },
+      "title": "Desperado",
+      "description": "A musician seeks revenge on the drug lord who murdered his lover, armed with a guitar case full of weapons.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Desperado",
+      "featured": false,
+      "actors": ["Antonio Banderas", "Salma Hayek", "Joaquim de Almeida", "Steve Buscemi"],
+      "rating": 7.2,
+      "releaseYear": 1995
+    },
+    {
+      "_id": { "$oid": "h3k01995fh1ll49lj7l4iid9" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "James Mangold",
+        "bio": "American director known for his work across genres, including superhero films",
+        "birthYear": 1963
+      },
+      "title": "Logan",
+      "description": "In a bleak future, an aging Wolverine and Professor X face their greatest challenges while protecting a young mutant.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Logan",
+      "featured": true,
+      "actors": ["Hugh Jackman", "Patrick Stewart", "Dafne Keen", "Boyd Holbrook"],
+      "rating": 8.1,
+      "releaseYear": 2017
+    },
+    {
+      "_id": { "$oid": "i4l12905gi2mm50mk8m5jje0" },
+      "genre": {
+        "name": "Action",
+        "description": "Fast-paced films with intense sequences and high stakes"
+      },
+      "director": {
+        "name": "Chad Stahelski",
+        "bio": "American director and former stuntman known for the John Wick series",
+        "birthYear": 1968
+      },
+      "title": "Atomic Blonde",
+      "description": "An MI6 agent is sent to Berlin during the Cold War to investigate the murder of a fellow agent and recover a missing list of double agents.",
+      "imageURL": "https://via.placeholder.com/300x450.png?text=Atomic+Blonde",
+      "featured": false,
+      "actors": ["Charlize Theron", "James McAvoy", "Eddie Marsan", "John Goodman"],
+      "rating": 6.7,
+      "releaseYear": 2017
+    }
+]

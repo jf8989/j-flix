@@ -1,0 +1,171 @@
+[
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd31" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Hayao Miyazaki",
+            "bio": "Renowned Japanese filmmaker and co-founder of Studio Ghibli, celebrated for his imaginative storytelling and detailed animation.",
+            "birthYear": 1941
+        },
+        "title": "Spirited Away",
+        "description": "A young girl, Chihiro, becomes trapped in a mysterious and magical world of spirits and must find a way to free herself and her parents.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Spirited+Away",
+        "featured": true,
+        "actors": [
+            "Rumi Hiiragi",
+            "Miyu Irino",
+            "Mari Natsuki",
+            "Takashi Naitô"
+        ],
+        "rating": 8.6,
+        "releaseYear": 2001
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd32" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Pete Docter",
+            "bio": "American animator, director, and screenwriter known for his work with Pixar Animation Studios.",
+            "birthYear": 1968
+        },
+        "title": "Inside Out",
+        "description": "The emotions of a young girl, Riley, are personified as Joy, Sadness, Anger, Fear, and Disgust, navigating her experiences as she moves to a new city.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Inside+Out",
+        "featured": true,
+        "actors": [
+            "Amy Poehler",
+            "Phyllis Smith",
+            "Richard Kind",
+            "Bill Hader"
+        ],
+        "rating": 8.1,
+        "releaseYear": 2015
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd33" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Andrew Stanton",
+            "bio": "American filmmaker and voice actor, known for his work with Pixar, including directing 'Finding Nemo' and 'WALL-E'.",
+            "birthYear": 1965
+        },
+        "title": "WALL-E",
+        "description": "In a distant future, a small waste-collecting robot embarks on a space journey that will ultimately decide the fate of mankind.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=WALL-E",
+        "featured": true,
+        "actors": [
+            "Ben Burtt",
+            "Elissa Knight",
+            "Jeff Garlin",
+            "Fred Willard"
+        ],
+        "rating": 8.4,
+        "releaseYear": 2008
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd34" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Brad Bird",
+            "bio": "American director, screenwriter, and animator, known for his work on 'The Incredibles' and 'Ratatouille'.",
+            "birthYear": 1957
+        },
+        "title": "The Incredibles",
+        "description": "A family of undercover superheroes, while trying to live the quiet suburban life, are forced into action to save the world.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Incredibles",
+        "featured": true,
+        "actors": [
+            "Craig T. Nelson",
+            "Holly Hunter",
+            "Samuel L. Jackson",
+            "Jason Lee"
+        ],
+        "rating": 8.0,
+        "releaseYear": 2004
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd35" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Dean DeBlois",
+            "bio": "Canadian film director, producer, and screenwriter, known for co-directing 'How to Train Your Dragon' series.",
+            "birthYear": 1970
+        },
+        "title": "How to Train Your Dragon",
+        "description": "A young Viking befriends a dragon, challenging his tribe's beliefs and changing their world forever.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=How+to+Train+Your+Dragon",
+        "featured": true,
+        "actors": [
+            "Jay Baruchel",
+            "Gerard Butler",
+            "Christopher Mintz-Plasse",
+            "Craig Ferguson"
+        ],
+        "rating": 8.1,
+        "releaseYear": 2010
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd36" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Rich Moore",
+            "bio": "American film and television animation director, known for his work on 'Wreck-It Ralph' and 'Zootopia'.",
+            "birthYear": 1963
+        },
+        "title": "Zootopia",
+        "description": "In a city of anthropomorphic animals, a rookie bunny cop and a cynical con artist fox must work together to uncover a conspiracy.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Zootopia",
+        "featured": true,
+        "actors": [
+            "Ginnifer Goodwin",
+            "Jason Bateman",
+            "Idris Elba",
+            "Jenny Slate"
+        ],
+        "rating": 8.0,
+        "releaseYear": 2016
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd37" },
+        "genre": {
+            "name": "Animation",
+            "description": "Films created using animated techniques, featuring imaginative visuals and storytelling."
+        },
+        "director": {
+            "name": "Chris Buck",
+            "bio": "American film director known for co-directing 'Frozen' and 'Tarzan'.",
+            "birthYear": 1960
+        },
+        "title": "Frozen",
+        "description": "A young princess with magical ice powers accidentally curses her kingdom with eternal winter and must embark on a journey to reverse the curse.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Frozen",
+        "featured": true,
+        "actors": [
+            "Kristen Bell",
+            "Idina Menzel",
+            "Josh Gad",
+            "Jonathan Groff"
+        ],
+        "rating": 7.4,
+        "releaseYear": 2013
+    }
+]
+ 
