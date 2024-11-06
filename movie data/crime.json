@@ -1,6 +1,5 @@
 [
     {
-        "_id": { "$oid": "86c15935df1cc61cb9e6ff41" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -24,7 +23,6 @@
         "releaseYear": 1990
     },
     {
-        "_id": { "$oid": "96d26945ef2dd72dc0f7gg52" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -48,7 +46,6 @@
         "releaseYear": 1974
     },
     {
-        "_id": { "$oid": "a7e37955ff3ee83ed1g8hh63" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -72,7 +69,6 @@
         "releaseYear": 1992
     },
     {
-        "_id": { "$oid": "b8f48965gg4ff94fe2i9jj74" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -96,7 +92,6 @@
         "releaseYear": 1983
     },
     {
-        "_id": { "$oid": "c9g59975hh5gg05gf3j0kk85" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -120,7 +115,6 @@
         "releaseYear": 1998
     },
     {
-        "_id": { "$oid": "d0h60985ii6hh16hg4l1ll96" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -144,7 +138,6 @@
         "releaseYear": 2008
     },
     {
-        "_id": { "$oid": "e1i71995jj7ii27ih5m2mm07" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -168,7 +161,6 @@
         "releaseYear": 1995
     },
     {
-        "_id": { "$oid": "f2j82905kk8jj38ji6n3nn18" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -192,7 +184,6 @@
         "releaseYear": 2007
     },
     {
-        "_id": { "$oid": "g3k93915ll9kk49kj7o4oo29" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
@@ -216,7 +207,6 @@
         "releaseYear": 1997
     },
     {
-        "_id": { "$oid": "h4l04925mm0ll50lk8p5pp30" },
         "genre": {
             "name": "Crime",
             "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."

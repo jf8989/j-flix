@@ -1,6 +1,5 @@
 [
     {
-        "_id": { "$oid": "76d26925aa1cc61ab9e6ff01" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -24,7 +23,6 @@
         "releaseYear": 1997
     },
     {
-        "_id": { "$oid": "86e37935bb2dd72bc9f7gg02" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -48,7 +46,6 @@
         "releaseYear": 1999
     },
     {
-        "_id": { "$oid": "97f48945cc3ff83cc1g8hh03" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -72,7 +69,6 @@
         "releaseYear": 2004
     },
     {
-        "_id": { "$oid": "a8g59955dd4gg94dc2i9jj04" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -96,7 +92,6 @@
         "releaseYear": 1990
     },
     {
-        "_id": { "$oid": "b9h60965ee5hh15ef3j0kk05" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -120,7 +115,6 @@
         "releaseYear": 2007
     },
     {
-        "_id": { "$oid": "c0i71975ff6ii26gg4l1ll06" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -144,7 +138,6 @@
         "releaseYear": 2004
     },
     {
-        "_id": { "$oid": "d1j82985gg7jj37hh5m2mm07" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -168,7 +161,6 @@
         "releaseYear": 1989
     },
     {
-        "_id": { "$oid": "e2k93995hh8kk48ii6n3nn08" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -192,7 +184,6 @@
         "releaseYear": 2005
     },
     {
-        "_id": { "$oid": "f3l04905ii9ll59jj7o4oo09" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."
@@ -216,7 +207,6 @@
         "releaseYear": 2001
     },
     {
-        "_id": { "$oid": "g4m15915jj0mm60kk8p5pp10" },
         "genre": {
             "name": "Romance",
             "description": "Films focused on love and romantic relationships, often with emotional or dramatic elements."

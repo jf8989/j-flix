@@ -1,6 +1,5 @@
 [
     {
-      "_id": { "$oid": "76c14925df1dd72ec9e6ee31" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -19,7 +18,6 @@
       "releaseYear": 1988
     },
     {
-      "_id": { "$oid": "a8d35925bf4ee63ed8f7aa52" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -38,7 +36,6 @@
       "releaseYear": 1991
     },
     {
-      "_id": { "$oid": "b7e46935cf9ff83fd1f8cc83" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -57,7 +54,6 @@
       "releaseYear": 1997
     },
     {
-      "_id": { "$oid": "c8f57945af6gg94ge2g9dd94" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -76,7 +72,6 @@
       "releaseYear": 2015
     },
     {
-      "_id": { "$oid": "d9g68955cf7hh05hf3h0eea5" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -95,7 +90,6 @@
       "releaseYear": 2000
     },
     {
-      "_id": { "$oid": "e0h79965af8ii16ig4i1ffa6" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -114,7 +108,6 @@
       "releaseYear": 2006
     },
     {
-      "_id": { "$oid": "f1i89975df9jj27jh5j2ggb7" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -133,7 +126,6 @@
       "releaseYear": 2014
     },
     {
-      "_id": { "$oid": "g2j90985eg0kk38ki6k3hhc8" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -152,7 +144,6 @@
       "releaseYear": 1995
     },
     {
-      "_id": { "$oid": "h3k01995fh1ll49lj7l4iid9" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
@@ -171,7 +162,6 @@
       "releaseYear": 2017
     },
     {
-      "_id": { "$oid": "i4l12905gi2mm50mk8m5jje0" },
       "genre": {
         "name": "Action",
         "description": "Fast-paced films with intense sequences and high stakes"
