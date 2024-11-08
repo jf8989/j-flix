@@ -34,10 +34,7 @@ async function getMoviesByGenre(req, res) {
   try {
     const genreName = req.params.name;
     const movies = await Movie.find({
-      $or: [
-        { "genre.name": genreName }, // Search in legacy field
-        { "genres.name": genreName }, // Search in new array field
-      ],
+      "genres.name": genreName,
     });
     res.json(movies);
   } catch (err) {

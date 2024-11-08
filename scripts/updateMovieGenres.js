@@ -1,4 +1,5 @@
 // scripts/updateMovieGenres.js
+
 const axios = require("axios");
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");
@@ -105,14 +106,16 @@ async function updateMovieGenres() {
           // Set the new genres array
           movie.genres = updatedGenres;
 
-          // Save the updated movie
-          await movie.save();
-
-          console.log(`Updated "${movie.title}":`, {
-            oldCount: movie.genres.length,
-            newCount: updatedGenres.length,
-            genres: updatedGenres.map((g) => g.name).join(", "),
-          });
+          // Save the updated movie with error handling
+          try {
+            await movie.save();
+            console.log(`Updated "${movie.title}":`, {
+              newCount: updatedGenres.length,
+              genres: updatedGenres.map((g) => g.name).join(", "),
+            });
+          } catch (saveError) {
+            console.error(`Error saving "${movie.title}":`, saveError);
+          }
         } else {
           console.log(`No TMDB results found for "${movie.title}"`);
         }

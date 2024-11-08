@@ -1,3 +1,4 @@
+// models/Movie.js
 const mongoose = require("mongoose");
 
 const MovieSchema = new mongoose.Schema({
@@ -17,7 +18,7 @@ const MovieSchema = new mongoose.Schema({
       },
       description: {
         type: String,
-        required: true,
+        required: false, // Make description optional if needed
       },
     },
   ],

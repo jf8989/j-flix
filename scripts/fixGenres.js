@@ -1,4 +1,5 @@
 // scripts/fixGenres.js
+
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");
 require("dotenv").config();
@@ -36,15 +37,31 @@ async function fixGenres() {
               `Movies in the ${movie.genre.name} genre`,
           });
         }
+
+        // Remove the old genre field
+        movie.genre = undefined;
+
+        // Save the updated movie with error handling
+        try {
+          await movie.save();
+          console.log(
+            `Updated "${movie.title}": ${movie.genres.length} genres`
+          );
+        } catch (saveError) {
+          console.error(`Error saving "${movie.title}":`, saveError);
+        }
+      } else {
+        // If no genre field, ensure it's undefined and save
+        if (movie.genre !== undefined) {
+          movie.genre = undefined;
+          try {
+            await movie.save();
+            console.log(`Removed old genre field from "${movie.title}"`);
+          } catch (saveError) {
+            console.error(`Error saving "${movie.title}":`, saveError);
+          }
+        }
       }
-
-      // Remove the old genre field
-      movie.genre = undefined;
-
-      // Save the updated movie
-      await movie.save();
-
-      console.log(`Updated "${movie.title}": ${movie.genres.length} genres`);
     }
 
     console.log("Genre migration completed successfully");
