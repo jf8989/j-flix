@@ -16,10 +16,6 @@ const MovieSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      description: {
-        type: String,
-        required: false, // Make description optional if needed
-      },
     },
   ],
   director: {
