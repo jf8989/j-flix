@@ -2,7 +2,7 @@
 
 const axios = require("axios");
 const mongoose = require("mongoose");
-const Movie = require("./models/Movie"); // Adjust the path if necessary
+const Movie = require("../models/Movie"); // Adjust the path if necessary
 require("dotenv").config(); // To access environment variables
 
 const tmdbApiKey = process.env.TMDB_API_KEY;

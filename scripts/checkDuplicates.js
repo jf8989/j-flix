@@ -1,6 +1,6 @@
 const axios = require("axios");
 const mongoose = require("mongoose");
-const Movie = require("./models/Movie");
+const Movie = require("../models/Movie");
 require("dotenv").config();
 
 const tmdbApiKey = process.env.TMDB_API_KEY;
