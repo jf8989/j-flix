@@ -1,6 +1,7 @@
+// scripts/updateMovieGenres.js
 const axios = require("axios");
 const mongoose = require("mongoose");
-const Movie = require("../models/Movie");
+const Movie = require("../models/Movie"); // Note the path change to correctly reference the model
 require("dotenv").config();
 
 const tmdbApiKey = process.env.TMDB_API_KEY;
@@ -81,17 +82,11 @@ async function updateMovieGenres() {
             }
           );
 
-          // Initialize arrays for storing genres
+          // Initialize array for storing genres
           const updatedGenres = [];
           const genreNames = new Set(); // Track unique genre names
 
-          // First, preserve any existing genre if it exists
-          if (movie.genre?.name) {
-            genreNames.add(movie.genre.name.toLowerCase());
-            updatedGenres.push(movie.genre);
-          }
-
-          // Add all genres from TMDB that aren't already present
+          // Add all genres from TMDB
           for (const tmdbGenre of movieDetails.data.genres) {
             const genreInfo = genreMap.get(tmdbGenre.id);
             if (genreInfo && !genreNames.has(genreInfo.name.toLowerCase())) {
@@ -103,14 +98,17 @@ async function updateMovieGenres() {
             }
           }
 
-          // Update the movie document
-          const oldGenresCount = movie.genres?.length || (movie.genre ? 1 : 0);
+          // Update the movie document using findByIdAndUpdate
+          const oldGenresCount = movie.genres?.length || 0;
 
-          // Update both the legacy genre field and the new genres array
-          movie.genre = updatedGenres[0] || null; // Keep the first genre in the legacy field
-          movie.genres = updatedGenres; // Store all genres in the new field
-
-          await movie.save();
+          const updated = await Movie.findByIdAndUpdate(
+            movie._id,
+            {
+              $unset: { genre: "" }, // Remove the old genre field
+              $set: { genres: updatedGenres }, // Set the new genres array
+            },
+            { new: true }
+          );
 
           console.log(`Updated "${movie.title}":`, {
             oldCount: oldGenresCount,
