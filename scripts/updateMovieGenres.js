@@ -1,7 +1,7 @@
 // scripts/updateMovieGenres.js
 const axios = require("axios");
 const mongoose = require("mongoose");
-const Movie = require("../models/Movie"); // Note the path change to correctly reference the model
+const Movie = require("../models/Movie");
 require("dotenv").config();
 
 const tmdbApiKey = process.env.TMDB_API_KEY;
@@ -11,10 +11,11 @@ async function updateMovieGenres() {
   try {
     // Connect to MongoDB
     await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: "myFlixDB",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB database:", mongoose.connection.name);
 
     // Fetch TMDB genre list once to use as reference
     const genreResponse = await axios.get(`${tmdbBaseUrl}/genre/movie/list`, {
@@ -42,7 +43,7 @@ async function updateMovieGenres() {
     // Process each movie
     for (const movie of movies) {
       try {
-        console.log(`\nProcessing "${movie.title}"...`);
+        console.log(`\nProcessing "${movie.title}" (${movie.releaseYear})...`);
 
         // Search for movie on TMDB
         const searchResponse = await axios.get(`${tmdbBaseUrl}/search/movie`, {
@@ -98,20 +99,17 @@ async function updateMovieGenres() {
             }
           }
 
-          // Update the movie document using findByIdAndUpdate
-          const oldGenresCount = movie.genres?.length || 0;
+          // Remove the old genre field
+          movie.genre = undefined;
 
-          const updated = await Movie.findByIdAndUpdate(
-            movie._id,
-            {
-              $unset: { genre: "" }, // Remove the old genre field
-              $set: { genres: updatedGenres }, // Set the new genres array
-            },
-            { new: true }
-          );
+          // Set the new genres array
+          movie.genres = updatedGenres;
+
+          // Save the updated movie
+          await movie.save();
 
           console.log(`Updated "${movie.title}":`, {
-            oldCount: oldGenresCount,
+            oldCount: movie.genres.length,
             newCount: updatedGenres.length,
             genres: updatedGenres.map((g) => g.name).join(", "),
           });
@@ -130,6 +128,8 @@ async function updateMovieGenres() {
             status: error.response.status,
             data: error.response.data,
           });
+        } else {
+          console.error("Error details:", error);
         }
       }
     }

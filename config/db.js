@@ -10,8 +10,12 @@ const uri =
 
 async function connectDB() {
   try {
-    // Connect to the MongoDB database (Removed useNewUrlParser and useUnifiedTopology)
-    await mongoose.connect(uri, { dbName: "myFlixDB" });
+    // Connect to the MongoDB database
+    await mongoose.connect(uri, {
+      dbName: "myFlixDB",
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log(
       `Connected successfully to MongoDB using Mongoose (${process.env.NODE_ENV})`
     );

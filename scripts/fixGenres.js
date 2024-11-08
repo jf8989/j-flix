@@ -7,8 +7,10 @@ async function fixGenres() {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "myFlixDB",
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    console.log("Connected to MongoDB database:", mongoose.connection.name);
 
     // Get all movies
     const movies = await Movie.find();
@@ -40,16 +42,9 @@ async function fixGenres() {
       movie.genre = undefined;
 
       // Save the updated movie
-      const updated = await Movie.findByIdAndUpdate(
-        movie._id,
-        {
-          $unset: { genre: "" },
-          $set: { genres: movie.genres },
-        },
-        { new: true }
-      );
+      await movie.save();
 
-      console.log(`Updated "${movie.title}": ${updated.genres.length} genres`);
+      console.log(`Updated "${movie.title}": ${movie.genres.length} genres`);
     }
 
     console.log("Genre migration completed successfully");
