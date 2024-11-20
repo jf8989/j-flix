@@ -7,6 +7,7 @@ const cors = require("cors");
 // Import and register models
 require("./models/Movie");
 require("./models/User");
+require("./models/Series");
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 const moviesRoutes = require("./routes/movies");
 const usersRoutes = require("./routes/users");
 const directorsRoutes = require("./routes/directors");
+const seriesRoutes = require("./routes/series");
 
 // Add the root route here, before other route definitions
 app.get("/", (req, res) => {
@@ -62,6 +64,7 @@ app.get("/", (req, res) => {
 app.use("/movies", moviesRoutes);
 app.use("/users", usersRoutes);
 app.use("/directors", directorsRoutes);
+app.use("/series", seriesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
