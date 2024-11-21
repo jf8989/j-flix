@@ -1,8 +1,9 @@
 // controllers/usersController.js
 const mongoose = require("mongoose");
 const User = require("../models/User");
-const Movie = require("../models/Movie"); // Add this line to import the Movie model
-const { validationResult } = require("express-validator"); // Add validation result handling
+const Movie = require("../models/Movie");
+const Series = require("../models/Series");
+const { validationResult } = require("express-validator");
 
 // Register a new user
 async function registerUser(req, res) {
@@ -183,10 +184,90 @@ async function deleteUser(req, res) {
   }
 }
 
+// Add a series to a user's favorites
+async function addSeriesToFavorites(req, res) {
+  try {
+    const lowerUsername = req.params.username.toLowerCase();
+    const { seriesID } = req.params;
+
+    // Check if seriesID is already an ObjectId or convert it
+    let validSeriesID;
+    if (mongoose.Types.ObjectId.isValid(seriesID)) {
+      validSeriesID = new mongoose.Types.ObjectId(seriesID);
+    } else {
+      validSeriesID = seriesID;
+    }
+
+    // Check if the series exists in the Series collection
+    const series = await Series.findOne({ _id: validSeriesID });
+
+    if (!series) {
+      console.log("Series not found in the database");
+      return res.status(404).json({ message: "Series not found" });
+    }
+
+    // but before adding it to favorites
+    if (!["Ongoing", "Ended", "Cancelled"].includes(series.status)) {
+      console.log("Invalid series status:", series.status);
+      return res.status(400).json({ message: "Invalid series status" });
+    }
+
+    console.log("Series found:", series.title);
+
+    // Update user's favorite series
+    const updatedUser = await User.findOneAndUpdate(
+      { Username: lowerUsername },
+      { $addToSet: { FavoriteSeries: validSeriesID } },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      res.json(updatedUser);
+    } else {
+      res.status(404).send("User not found or series already in favorites");
+    }
+  } catch (err) {
+    console.error("Error adding series to favorites:", err);
+    res.status(500).send("Error: " + err);
+  }
+}
+
+// Remove a series from a user's favorites
+async function removeSeriesFromFavorites(req, res) {
+  try {
+    const lowerUsername = req.params.username.toLowerCase();
+    const { seriesID } = req.params;
+
+    let validSeriesID;
+    if (mongoose.Types.ObjectId.isValid(seriesID)) {
+      validSeriesID = new mongoose.Types.ObjectId(seriesID);
+    } else {
+      validSeriesID = seriesID;
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { Username: lowerUsername },
+      { $pull: { FavoriteSeries: validSeriesID } },
+      { new: true }
+    );
+
+    if (updatedUser) {
+      res.json(updatedUser);
+    } else {
+      res.status(404).send("User not found or series not in favorites");
+    }
+  } catch (err) {
+    console.error("Error removing series from favorites:", err);
+    res.status(500).send("Error: " + err);
+  }
+}
+
 module.exports = {
   registerUser,
   updateUserInfo,
   addMovieToFavorites,
   removeMovieFromFavorites,
+  addSeriesToFavorites,
+  removeSeriesFromFavorites,
   deleteUser,
 };

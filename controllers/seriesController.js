@@ -1,3 +1,4 @@
+// controllers/seriesController.js
 const Series = require("../models/Series");
 
 // Get all series from the database

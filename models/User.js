@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
   },
   Birthday: Date,
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
+  FavoriteSeries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Series" }],
 });
 
 // Static method to hash the password

@@ -1,3 +1,4 @@
+// models/Series.js
 const mongoose = require("mongoose");
 
 const SeriesSchema = new mongoose.Schema({

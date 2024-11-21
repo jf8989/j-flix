@@ -52,4 +52,18 @@ router.delete(
   usersController.deleteUser
 );
 
+// Add a series to user's favorites
+router.post(
+  "/:username/series/:seriesID",
+  passport.authenticate("jwt", { session: false }),
+  usersController.addSeriesToFavorites
+);
+
+// Remove a series from user's favorites
+router.delete(
+  "/:username/series/:seriesID",
+  passport.authenticate("jwt", { session: false }),
+  usersController.removeSeriesFromFavorites
+);
+
 module.exports = router;

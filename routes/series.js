@@ -1,3 +1,4 @@
+// routes/series.js
 const express = require("express");
 const seriesController = require("../controllers/seriesController");
 const passport = require("passport");
