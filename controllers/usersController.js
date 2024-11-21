@@ -206,12 +206,6 @@ async function addSeriesToFavorites(req, res) {
       return res.status(404).json({ message: "Series not found" });
     }
 
-    // but before adding it to favorites
-    if (!["Ongoing", "Ended", "Cancelled"].includes(series.status)) {
-      console.log("Invalid series status:", series.status);
-      return res.status(400).json({ message: "Invalid series status" });
-    }
-
     console.log("Series found:", series.title);
 
     // Update user's favorite series
