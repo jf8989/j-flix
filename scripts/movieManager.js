@@ -1,5 +1,17 @@
 // movieManager.js
-// master script that adds a movie correctly to the database, including all its information
+/*
+Purpose: Master script for adding new movies to the database with complete information
+Usage Scenarios:
+- When adding new movies to your database from scratch
+- When you want to populate your database with a list of movies
+- When you need to ensure new movies have all required fields including trailers
+
+Key Features:
+- Adds complete movie information including trailers
+- Handles genre mapping
+- Processes multiple movies from a list
+- Includes robust error handling and rate limiting
+*/
 const axios = require("axios");
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");

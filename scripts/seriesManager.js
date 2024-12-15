@@ -1,4 +1,17 @@
 // seriesManager.js
+/*
+Purpose: Master script for managing TV series in the database
+Usage Scenarios:
+- When adding new TV series to your database
+- When populating your database with a list of series
+- When you need complete series information including trailers
+
+Key Features:
+- Creates and manages TV series entries
+- Includes trailer information by default
+- Handles multiple series from a list
+- Includes detailed logging and error handling
+*/
 const axios = require("axios");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "../.env" });

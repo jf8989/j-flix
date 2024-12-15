@@ -1,5 +1,17 @@
 // updateTMDBData.js
-// to update names and ID's for each of the movies in the database
+/*
+Purpose: Updates movies with official TMDB data including IDs and trailers
+Usage Scenarios:
+- When you need to standardize movie information with TMDB data
+- When you want to add missing TMDB IDs
+- When you want to update or add trailer information
+
+Key Features:
+- Updates existing movies with official TMDB data
+- Adds missing TMDB IDs
+- Updates or adds trailer information
+- Includes comprehensive error handling
+*/
 const axios = require("axios");
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");

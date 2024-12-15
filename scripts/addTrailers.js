@@ -1,8 +1,17 @@
 // addTrailers.js
-// to update all movies in the database that may not have trailers.
-// This script will use the TMDB API to search for trailers for each
-// movie and update the database with the trailer information if found.
-// The script will also log the number of movies processed, updated, and any errors encountered during the process.
+/*
+Purpose: Updates existing movies in the database by adding trailer information from TMDB API
+Usage Scenarios:
+- When you need to add missing trailer information to existing movies
+- When you want to update trailer information for movies that already exist
+- Best used as a one-time migration script to add trailers to all movies
+
+Key Features:
+- Processes all movies in the database
+- Skips movies that already have trailers
+- Uses TMDB API to fetch trailer data
+- Includes detailed logging and error handling
+*/
 const axios = require("axios");
 const mongoose = require("mongoose");
 const Movie = require("../models/Movie");
