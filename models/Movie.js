@@ -29,6 +29,15 @@ const MovieSchema = new mongoose.Schema({
   featured: Boolean,
   releaseYear: Number,
   rating: Number,
+  // Let's properly define each field type in the trailer object
+  trailer: {
+    site: { type: String },
+    key: { type: String },
+    name: { type: String },
+    official: { type: Boolean },
+    type: { type: String }
+  },
+  tmdbId: { type: Number }
 });
 
 module.exports = mongoose.model("Movie", MovieSchema);
