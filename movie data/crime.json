@@ -1,0 +1,232 @@
+[
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Martin Scorsese",
+            "bio": "American director known for his work on crime and psychological films.",
+            "birthYear": 1942
+        },
+        "title": "Goodfellas",
+        "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife and mob partners.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Goodfellas",
+        "featured": true,
+        "actors": [
+            "Robert De Niro",
+            "Ray Liotta",
+            "Joe Pesci",
+            "Lorraine Bracco"
+        ],
+        "rating": 8.7,
+        "releaseYear": 1990
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Francis Ford Coppola",
+            "bio": "American filmmaker known for creating iconic crime dramas.",
+            "birthYear": 1939
+        },
+        "title": "The Godfather Part II",
+        "description": "The early life and career of Vito Corleone in 1920s New York is portrayed while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Godfather+Part+II",
+        "featured": true,
+        "actors": [
+            "Al Pacino",
+            "Robert De Niro",
+            "Robert Duvall",
+            "Diane Keaton"
+        ],
+        "rating": 9.0,
+        "releaseYear": 1974
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Quentin Tarantino",
+            "bio": "American director known for his nonlinear storylines and stylized violence.",
+            "birthYear": 1963
+        },
+        "title": "Reservoir Dogs",
+        "description": "After a simple jewelry heist goes terribly wrong, the surviving criminals begin to suspect that one of them is a police informant.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Reservoir+Dogs",
+        "featured": true,
+        "actors": [
+            "Harvey Keitel",
+            "Tim Roth",
+            "Michael Madsen",
+            "Chris Penn"
+        ],
+        "rating": 8.3,
+        "releaseYear": 1992
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Brian De Palma",
+            "bio": "American director known for his suspenseful crime dramas.",
+            "birthYear": 1940
+        },
+        "title": "Scarface",
+        "description": "In 1980 Miami, a determined Cuban immigrant takes over a drug cartel and succumbs to greed.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Scarface",
+        "featured": true,
+        "actors": [
+            "Al Pacino",
+            "Michelle Pfeiffer",
+            "Steven Bauer",
+            "Mary Elizabeth Mastrantonio"
+        ],
+        "rating": 8.3,
+        "releaseYear": 1983
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Guy Ritchie",
+            "bio": "British director known for his fast-paced and dynamic crime films.",
+            "birthYear": 1968
+        },
+        "title": "Lock, Stock and Two Smoking Barrels",
+        "description": "Eddy and his friends find themselves in debt to a powerful gangster and must pull off a heist to pay him back.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Lock+Stock+and+Two+Smoking+Barrels",
+        "featured": false,
+        "actors": [
+            "Jason Flemyng",
+            "Dexter Fletcher",
+            "Nick Moran",
+            "Jason Statham"
+        ],
+        "rating": 8.2,
+        "releaseYear": 1998
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Christopher Nolan",
+            "bio": "British-American director known for his complex narratives.",
+            "birthYear": 1970
+        },
+        "title": "The Dark Knight",
+        "description": "Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice when the Joker wreaks havoc on Gotham.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Dark+Knight",
+        "featured": true,
+        "actors": [
+            "Christian Bale",
+            "Heath Ledger",
+            "Aaron Eckhart",
+            "Michael Caine"
+        ],
+        "rating": 9.0,
+        "releaseYear": 2008
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Michael Mann",
+            "bio": "American director known for his atmospheric and intense crime dramas.",
+            "birthYear": 1943
+        },
+        "title": "Heat",
+        "description": "A group of professional bank robbers start to feel the heat from police when they unknowingly leave a clue at their latest heist.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Heat",
+        "featured": true,
+        "actors": [
+            "Al Pacino",
+            "Robert De Niro",
+            "Val Kilmer",
+            "Jon Voight"
+        ],
+        "rating": 8.2,
+        "releaseYear": 1995
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Ridley Scott",
+            "bio": "British director known for his atmospheric and intense visuals.",
+            "birthYear": 1937
+        },
+        "title": "American Gangster",
+        "description": "A detective works to bring down the drug empire of Frank Lucas, a heroin kingpin in Harlem.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=American+Gangster",
+        "featured": false,
+        "actors": [
+            "Denzel Washington",
+            "Russell Crowe",
+            "Chiwetel Ejiofor",
+            "Josh Brolin"
+        ],
+        "rating": 7.8,
+        "releaseYear": 2007
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Curtis Hanson",
+            "bio": "American director known for his work on thrillers and crime dramas.",
+            "birthYear": 1945
+        },
+        "title": "L.A. Confidential",
+        "description": "Three policemen, each with his own motives and obsessions, struggle to solve a series of murders.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=L.A.+Confidential",
+        "featured": true,
+        "actors": [
+            "Kevin Spacey",
+            "Russell Crowe",
+            "Guy Pearce",
+            "Kim Basinger"
+        ],
+        "rating": 8.2,
+        "releaseYear": 1997
+    },
+    {
+        "genre": {
+            "name": "Crime",
+            "description": "Films that involve criminal activities, often focusing on crime, justice, and moral dilemmas."
+        },
+        "director": {
+            "name": "Joel Coen",
+            "bio": "American filmmaker known for his work with his brother, Ethan, in creating dark and quirky crime films.",
+            "birthYear": 1954
+        },
+        "title": "Fargo",
+        "description": "A car salesman hires two criminals to kidnap his wife, but things go wrong and escalate into a series of murders.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Fargo",
+        "featured": true,
+        "actors": [
+            "William H. Macy",
+            "Frances McDormand",
+            "Steve Buscemi",
+            "Peter Stormare"
+        ],
+        "rating": 8.1,
+        "releaseYear": 1996
+    }
+]

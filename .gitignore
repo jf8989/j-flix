@@ -1,6 +1,6 @@
 node_modules/
 .env
 .vercel
-movies.json
+movies-wrong.json
 users.json
 directors.json

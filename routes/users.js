@@ -41,7 +41,7 @@ router.post(
 );
 
 router.delete(
-  "/:username/movies/:movieId",
+  "/:username/movies/:movieID",
   passport.authenticate("jwt", { session: false }),
   usersController.removeMovieFromFavorites
 );

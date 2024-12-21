@@ -32,7 +32,10 @@ async function getMovieByTitle(req, res) {
 // Get movies by genre
 async function getMoviesByGenre(req, res) {
   try {
-    const movies = await Movie.find({ "genre.name": req.params.name });
+    const genreName = req.params.name;
+    const movies = await Movie.find({
+      "genres.name": genreName,
+    });
     res.json(movies);
   } catch (err) {
     console.error(err);

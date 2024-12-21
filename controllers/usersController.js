@@ -50,7 +50,7 @@ async function registerUser(req, res) {
   }
 }
 
-// Update user information
+// Update user information (partial updates)
 async function updateUserInfo(req, res) {
   // Check for validation errors
   let errors = validationResult(req);
@@ -61,11 +61,22 @@ async function updateUserInfo(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
 
+    // Ensure req.body only has fields that need updating
+    const updatedFields = {};
+    if (req.body.username)
+      updatedFields.Username = req.body.username.toLowerCase();
+    if (req.body.password)
+      updatedFields.Password = User.hashPassword(req.body.password);
+    if (req.body.email) updatedFields.Email = req.body.email;
+    if (req.body.birthday) updatedFields.Birthday = new Date(req.body.birthday);
+
+    // Perform the update using only the updatedFields
     const updatedUser = await User.findOneAndUpdate(
       { Username: lowerUsername },
-      { $set: req.body },
+      { $set: updatedFields }, // Only update the fields passed in req.body
       { new: true }
     );
+
     if (updatedUser) {
       res.json(updatedUser);
     } else {
@@ -79,31 +90,33 @@ async function updateUserInfo(req, res) {
 // Add a movie to a user's favorites
 async function addMovieToFavorites(req, res) {
   try {
-    const lowerUsername = req.params.username.toLowerCase(); // Convert to lowercase
+    const lowerUsername = req.params.username.toLowerCase();
+    const { movieID } = req.params;
 
-    // Log the full request object to see what's being passed
-    console.log("Full Request Params:", req.params);
-
-    // Check if movieID is being received
-    console.log("Movie ID received:", req.params.movieID);
-
-    // Convert the movie ID to ObjectId
-    const movieID = new mongoose.Types.ObjectId(req.params.movieID);
+    // Check if movieID is already an ObjectId or convert it if not
+    let validMovieID;
+    if (mongoose.Types.ObjectId.isValid(movieID)) {
+      // Convert to ObjectId only if it's a valid ObjectId format
+      validMovieID = new mongoose.Types.ObjectId(movieID);
+    } else {
+      // Leave it as a string if it's not a valid ObjectId format
+      validMovieID = movieID;
+    }
 
     // Check if the movie exists in the Movie collection
-    const movie = await Movie.findById(movieID);
+    const movie = await Movie.findOne({ _id: validMovieID });
 
     if (!movie) {
       console.log("Movie not found in the database");
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    console.log("Movie found:", movie.title); // Log the found movie details
+    console.log("Movie found:", movie.title);
 
-    // Proceed to update the user's favorite movies
+    // Update user's favorite movies
     const updatedUser = await User.findOneAndUpdate(
       { Username: lowerUsername },
-      { $addToSet: { FavoriteMovies: movieID } },
+      { $addToSet: { FavoriteMovies: validMovieID } },
       { new: true }
     );
 
@@ -122,20 +135,24 @@ async function addMovieToFavorites(req, res) {
 async function removeMovieFromFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
-    const movieID = new mongoose.Types.ObjectId(req.params.movieID);
+    const { movieID } = req.params;
 
-    console.log("Removing movie from favorites:", movieID);
+    let validMovieID;
+    if (mongoose.Types.ObjectId.isValid(movieID)) {
+      validMovieID = new mongoose.Types.ObjectId(movieID);
+    } else {
+      validMovieID = movieID;
+    }
 
     const updatedUser = await User.findOneAndUpdate(
       { Username: lowerUsername },
-      { $pull: { FavoriteMovies: movieID } },
+      { $pull: { FavoriteMovies: validMovieID } },
       { new: true }
     );
+
     if (updatedUser) {
-      console.log("Movie removed from favorites:", updatedUser);
       res.json(updatedUser);
     } else {
-      console.log("User or movie not found");
       res.status(404).send("User not found or movie not in favorites");
     }
   } catch (err) {

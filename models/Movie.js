@@ -10,10 +10,14 @@ const MovieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  genre: {
-    name: String,
-    description: String,
-  },
+  genres: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   director: {
     name: String,
     bio: String,
@@ -21,11 +25,10 @@ const MovieSchema = new mongoose.Schema({
     deathYear: Number,
   },
   actors: [String],
-  imagePath: String,
+  imageURL: String,
   featured: Boolean,
   releaseYear: Number,
   rating: Number,
 });
 
-// Export the model
 module.exports = mongoose.model("Movie", MovieSchema);

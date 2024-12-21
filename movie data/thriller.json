@@ -1,0 +1,171 @@
+[
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd31" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "Christopher Nolan",
+            "bio": "British-American filmmaker known for his complex narratives and visual storytelling.",
+            "birthYear": 1970
+        },
+        "title": "Inception",
+        "description": "A skilled thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Inception",
+        "featured": true,
+        "actors": [
+            "Leonardo DiCaprio",
+            "Joseph Gordon-Levitt",
+            "Elliot Page",
+            "Tom Hardy"
+        ],
+        "rating": 8.8,
+        "releaseYear": 2010
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd32" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "David Fincher",
+            "bio": "American director known for his dark and stylish thrillers.",
+            "birthYear": 1962
+        },
+        "title": "Gone Girl",
+        "description": "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Gone+Girl",
+        "featured": true,
+        "actors": [
+            "Ben Affleck",
+            "Rosamund Pike",
+            "Neil Patrick Harris",
+            "Tyler Perry"
+        ],
+        "rating": 8.1,
+        "releaseYear": 2014
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd33" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "Martin Scorsese",
+            "bio": "American filmmaker known for his work on crime films and collaborations with Robert De Niro.",
+            "birthYear": 1942
+        },
+        "title": "Shutter Island",
+        "description": "In 1954, a U.S. Marshal investigates the disappearance of a murderer who escaped from a hospital for the criminally insane.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Shutter+Island",
+        "featured": true,
+        "actors": [
+            "Leonardo DiCaprio",
+            "Emily Mortimer",
+            "Mark Ruffalo",
+            "Ben Kingsley"
+        ],
+        "rating": 8.2,
+        "releaseYear": 2010
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd34" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "Denis Villeneuve",
+            "bio": "Canadian filmmaker known for his work on science fiction and thriller films.",
+            "birthYear": 1967
+        },
+        "title": "Prisoners",
+        "description": "When Keller Dover's daughter and her friend go missing, he takes matters into his own hands as the police pursue multiple leads and the pressure mounts.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Prisoners",
+        "featured": true,
+        "actors": [
+            "Hugh Jackman",
+            "Jake Gyllenhaal",
+            "Viola Davis",
+            "Melissa Leo"
+        ],
+        "rating": 8.1,
+        "releaseYear": 2013
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd35" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "Alfred Hitchcock",
+            "bio": "British filmmaker known as the 'Master of Suspense' for his work in the thriller genre.",
+            "birthYear": 1899
+        },
+        "title": "Psycho",
+        "description": "A Phoenix secretary embezzles $40,000 from her employer's client, goes on the run, and checks into a remote motel run by a young man under the domination of his mother.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Psycho",
+        "featured": true,
+        "actors": [
+            "Anthony Perkins",
+            "Janet Leigh",
+            "Vera Miles",
+            "John Gavin"
+        ],
+        "rating": 8.5,
+        "releaseYear": 1960
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd36" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "Jonathan Demme",
+            "bio": "American director known for his diverse body of work, including thrillers and concert films.",
+            "birthYear": 1944
+        },
+        "title": "The Silence of the Lambs",
+        "description": "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=The+Silence+of+the+Lambs",
+        "featured": true,
+        "actors": [
+            "Jodie Foster",
+            "Anthony Hopkins",
+            "Lawrence A. Bonney",
+            "Kasi Lemmons"
+        ],
+        "rating": 8.6,
+        "releaseYear": 1991
+    },
+    {
+        "_id": { "$oid": "66b53915cf0cc61cb9e5dd37" },
+        "genre": {
+            "name": "Thriller",
+            "description": "Films characterized by tension, suspense, and high stakes."
+        },
+        "director": {
+            "name": "David Fincher",
+            "bio": "American director known for his dark and stylish thrillers.",
+            "birthYear": 1962
+        },
+        "title": "Se7en",
+        "description": "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
+        "imageURL": "https://via.placeholder.com/300x450.png?text=Se7en",
+        "featured": true,
+        "actors": [
+            "Brad Pitt",
+            "Morgan Freeman",
+            "Gwyneth Paltrow",
+            "Kevin Spacey"
+        ],
+        "rating": 8.6,
+        "releaseYear": 1995
+    }
+]
+ 

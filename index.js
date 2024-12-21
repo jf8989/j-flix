@@ -14,7 +14,17 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Enable pre-flight across-the-board
+app.options("*", cors());
 
 // Passport setup
 const passport = require("passport");
@@ -32,6 +42,11 @@ mongoose
   })
   .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.log("Error connecting to MongoDB: ", err));
+
+app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.path, req.headers.origin);
+  next();
+});
 
 // Import routes
 const moviesRoutes = require("./routes/movies");
