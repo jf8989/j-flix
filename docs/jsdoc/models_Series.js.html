@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/Series.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/Series.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// models/Series.js
+const mongoose = require("mongoose");
+
+/**
+ * Represents a TV series in the database.
+ * @typedef {object} SeriesSchema
+ * @property {string} title - The title of the series. Required.
+ * @property {string} referenceTitle - A reference title, possibly for internal use or linking. Required.
+ * @property {string} description - A brief description or synopsis of the series. Required.
+ * @property {object} creator - Information about the series' creator.
+ * @property {string} creator.name - The name of the creator.
+ * @property {string} creator.bio - A short biography of the creator.
+ * @property {number} creator.birthYear - The birth year of the creator.
+ * @property {number} creator.deathYear - The death year of the creator (if applicable).
+ * @property {Array&lt;string>} actors - An array of actor names starring in the series.
+ * @property {string} imageURL - URL to the series' poster or promotional image.
+ * @property {boolean} featured - Indicates if the series is featured.
+ * @property {number} firstAirYear - The year the series first aired.
+ * @property {number} lastAirYear - The year the series last aired (if applicable).
+ * @property {number} rating - The series' rating (e.g., out of 10).
+ * @property {Array&lt;object>} genres - An array of genre objects associated with the series.
+ * @property {string} genres.name - The name of the genre. Required.
+ * @property {number} numberOfSeasons - The total number of seasons. Required.
+ * @property {string} status - The current status of the series ('Ongoing', 'Ended', 'Cancelled'). Required.
+ * @property {object} trailer - Information about the series' trailer.
+ * @property {string} trailer.url - URL to the trailer video.
+ * @property {string} trailer.thumbnailURL - URL to the trailer's thumbnail image.
+ */
+const SeriesSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  referenceTitle: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  creator: {
+    name: String,
+    bio: String,
+    birthYear: Number,
+    deathYear: Number,
+  },
+  actors: [String],
+  imageURL: String,
+  featured: Boolean,
+  firstAirYear: Number,
+  lastAirYear: Number,
+  rating: Number,
+  genres: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  numberOfSeasons: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["Ongoing", "Ended", "Cancelled"],
+    required: true,
+  },
+  trailer: {
+    url: String,
+    thumbnailURL: String,
+  },
+});
+
+module.exports = mongoose.model("Series", SeriesSchema);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

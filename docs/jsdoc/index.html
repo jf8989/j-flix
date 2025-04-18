@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>j-Flix API</h1>
+<h2>🎬 Project Overview</h2>
+<p>j-Flix is a robust server-side component of a movie web application. It provides users with access to information about different movies, directors, and genres. Users can sign up, update their personal information, and create a list of their favorite movies.</p>
+<h2>🚀 Features</h2>
+<h3>Essential Features</h3>
+<ul>
+<li>Retrieve a list of all movies</li>
+<li>Get detailed information about a specific movie</li>
+<li>Access data about movie genres</li>
+<li>Obtain information about directors</li>
+<li>User registration and authentication</li>
+<li>Profile management (update user info)</li>
+<li>Favorite movies list management</li>
+</ul>
+<h3>Optional Features (Future Implementation)</h3>
+<ul>
+<li>Actor information and movie appearances</li>
+<li>Extended movie details (release date, ratings)</li>
+<li>&quot;To Watch&quot; list functionality</li>
+</ul>
+<h2>🛠 Technical Stack</h2>
+<ul>
+<li><strong>Runtime</strong>: Node.js</li>
+<li><strong>Framework</strong>: Express.js</li>
+<li><strong>Database</strong>: MongoDB with Mongoose ODM</li>
+<li><strong>Authentication</strong>: JWT (JSON Web Tokens)</li>
+<li><strong>API Architecture</strong>: RESTful</li>
+<li><strong>Deployment</strong>: Heroku</li>
+</ul>
+<h2>📋 API Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Endpoint</th>
+<th>Description</th>
+<th>Request Body</th>
+<th>Response Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/movies</td>
+<td>Get all movies</td>
+<td>None</td>
+<td>JSON array of movie objects</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/movies/:title</td>
+<td>Get a specific movie by title</td>
+<td>None</td>
+<td>JSON object with movie details</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/genres/:name</td>
+<td>Get genre information</td>
+<td>None</td>
+<td>JSON object with genre details</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/directors/:name</td>
+<td>Get director information</td>
+<td>None</td>
+<td>JSON object with director details</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/users</td>
+<td>Register a new user</td>
+<td>JSON object with user data</td>
+<td>JSON object with added user data</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>/users/:username</td>
+<td>Update user information</td>
+<td>JSON object with updated user data</td>
+<td>JSON object with updated user data</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/users/:username/movies/:movieId</td>
+<td>Add a movie to favorites</td>
+<td>None</td>
+<td>Text message confirming addition</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/users/:username/movies/:movieId</td>
+<td>Remove a movie from favorites</td>
+<td>None</td>
+<td>Text message confirming removal</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/users/:username</td>
+<td>Deregister a user</td>
+<td>None</td>
+<td>Text message confirming user removal</td>
+</tr>
+</tbody>
+</table>
+<h2>🔐 Authentication and Authorization</h2>
+<p>The API uses JWT for authentication and authorization. Users need to register and login to access protected endpoints.</p>
+<h2>🔧 Installation and Setup</h2>
+<ol>
+<li>Clone the repository</li>
+<li>Install dependencies: <code>npm install</code></li>
+<li>Set up environment variables (MongoDB URI, JWT Secret)</li>
+<li>Start the server: <code>npm start</code></li>
+</ol>
+<h2>🧪 Testing</h2>
+<p>API endpoints can be tested using Postman. Ensure to include the JWT token in the Authorization header for protected routes.</p>
+<h2>📚 Documentation</h2>
+<p>For detailed API documentation, please refer to the <a href="public/documentation.html">API Documentation</a>.</p>
+<h2>🤝 Contributing</h2>
+<p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
+<h2>📄 License</h2>
+<p>This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This means you are free to:</p>
+<ul>
+<li>Share — copy and redistribute the material in any medium or format</li>
+<li>Adapt — remix, transform, and build upon the material</li>
+</ul>
+<p>Under the following terms:</p>
+<ul>
+<li>Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.</li>
+<li>NonCommercial — You may not use the material for commercial purposes.</li>
+</ul>
+<p>See the <a href="LICENSE.md">LICENSE.md</a> file in the project root for the full license text.</p>
+<h2>👨‍💻 Author</h2>
+<p>Juan Francisco Marcenaro A. - Full Stack Developer in training</p>
+<hr>
+<p>For any additional information or queries, please open an issue or contact the repository owner.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: routes/series.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: routes/series.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// routes/series.js
+const express = require("express");
+const seriesController = require("../controllers/seriesController");
+const passport = require("passport");
+require("../passport");
+
+const router = express.Router();
+
+// All routes are protected with JWT authentication
+/**
+ * Route serving all series.
+ * @name GET /series
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getAllSeries}
+ */
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getAllSeries
+);
+
+/**
+ * Route serving a single series by title.
+ * @name GET /series/title/:title
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByTitle}
+ */
+router.get(
+  "/title/:title",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByTitle
+);
+
+/**
+ * Route serving series by genre name.
+ * @name GET /series/genre/:name
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByGenre}
+ */
+router.get(
+  "/genre/:name",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByGenre
+);
+
+/**
+ * Route serving series by status.
+ * @name GET /series/status/:status
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByStatus}
+ */
+router.get(
+  "/status/:status",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByStatus
+);
+
+/**
+ * Route serving series by actor name.
+ * @name GET /series/actor/:actorName
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByActor}
+ */
+router.get(
+  "/actor/:actorName",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByActor
+);
+
+/**
+ * Route serving series by minimum rating.
+ * @name GET /series/rating/:minRating
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByRating}
+ */
+router.get(
+  "/rating/:minRating",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByRating
+);
+
+/**
+ * Route serving series by first air year range.
+ * @name GET /series/year-range/:startYear/:endYear
+ * @function
+ * @memberof module:routes/series
+ * @param {string} path - Express path
+ * @param {callback} middleware - Passport JWT authentication middleware.
+ * @param {callback} middleware - {@link module:controllers/seriesController.getSeriesByYearRange}
+ */
+router.get(
+  "/year-range/:startYear/:endYear",
+  passport.authenticate("jwt", { session: false }),
+  seriesController.getSeriesByYearRange
+);
+
+module.exports = router;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

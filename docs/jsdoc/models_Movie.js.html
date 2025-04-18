@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/Movie.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/Movie.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// models/Movie.js
+const mongoose = require("mongoose");
+
+/**
+ * Represents a movie in the database.
+ * @typedef {object} MovieSchema
+ * @property {string} title - The title of the movie. Required.
+ * @property {string} description - A brief description or synopsis of the movie. Required.
+ * @property {Array&lt;object>} genres - An array of genre objects associated with the movie.
+ * @property {string} genres.name - The name of the genre. Required.
+ * @property {object} director - Information about the movie's director.
+ * @property {string} director.name - The name of the director.
+ * @property {string} director.bio - A short biography of the director.
+ * @property {number} director.birthYear - The birth year of the director.
+ * @property {number} director.deathYear - The death year of the director (if applicable).
+ * @property {Array&lt;string>} actors - An array of actor names starring in the movie.
+ * @property {string} imageURL - URL to the movie's poster or promotional image.
+ * @property {boolean} featured - Indicates if the movie is featured.
+ * @property {number} releaseYear - The year the movie was released.
+ * @property {number} rating - The movie's rating (e.g., out of 10).
+ * @property {object} trailer - Information about the movie's trailer.
+ * @property {string} trailer.site - The site hosting the trailer (e.g., YouTube).
+ * @property {string} trailer.key - The unique key or ID for the trailer on the site.
+ * @property {string} trailer.name - The name or title of the trailer.
+ * @property {boolean} trailer.official - Indicates if the trailer is official.
+ * @property {string} trailer.type - The type of trailer (e.g., Teaser, Trailer).
+ * @property {number} tmdbId - The Movie Database (TMDb) ID for the movie.
+ */
+const MovieSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  genres: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  director: {
+    name: String,
+    bio: String,
+    birthYear: Number,
+    deathYear: Number,
+  },
+  actors: [String],
+  imageURL: String,
+  featured: Boolean,
+  releaseYear: Number,
+  rating: Number,
+  // Let's properly define each field type in the trailer object
+  trailer: {
+    site: { type: String },
+    key: { type: String },
+    name: { type: String },
+    official: { type: Boolean },
+    type: { type: String }
+  },
+  tmdbId: { type: Number }
+});
+
+module.exports = mongoose.model("Movie", MovieSchema);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

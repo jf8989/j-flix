@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/directorsController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/directorsController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// controllers/directorsController.js
+
+const Movie = require("../models/Movie");
+
+// Get a director by name
+/**
+ * Retrieves director information by name.
+ * Finds a movie associated with the director name provided in request parameters.
+ * @function getDirectorByName
+ * @param {object} req - Express request object, expects `req.params.name`.
+ * @param {object} res - Express response object.
+ * @returns {Promise&lt;void>} Sends JSON response with director data or 404/500 error.
+ * @async
+ */
+async function getDirectorByName(req, res) {
+  try {
+    const movie = await Movie.findOne({ "director.name": req.params.name });
+    if (movie) {
+      res.json(movie.director);
+    } else {
+      res.status(404).send("Director not found");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+}
+
+// Update the bio of a director in multiple movies
+/**
+ * Updates the biography of a director across all movies they directed.
+ * Uses the director name from `req.params.name` and the new bio from `req.body.bio`.
+ * @function updateDirectorBio
+ * @param {object} req - Express request object, expects `req.params.name` and `req.body.bio`.
+ * @param {object} res - Express response object.
+ * @returns {Promise&lt;void>} Sends JSON response with update status or 404/500 error.
+ * @async
+ */
+async function updateDirectorBio(req, res) {
+  try {
+    const result = await Movie.updateMany(
+      { "director.name": new RegExp(`^${req.params.name}$`, "i") },
+      { $set: { "director.bio": req.body.bio } }
+    );
+
+    if (result.matchedCount === 0) {
+      res.status(404).send("Director not found");
+    } else if (result.modifiedCount === 0) {
+      res.status(200).send("No changes were made to the director's bio");
+    } else {
+      res
+        .status(200)
+        .json({ message: `Updated bio for ${result.modifiedCount} movies` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+}
+
+// Get all movies by a director
+/**
+ * Retrieves all movies directed by a specific director.
+ * Uses the director name provided in `req.params.directorName`.
+ * @function getMoviesByDirector
+ * @param {object} req - Express request object, expects `req.params.directorName`.
+ * @param {object} res - Express response object.
+ * @returns {Promise&lt;void>} Sends JSON response with an array of movies or 500 error.
+ * @async
+ */
+async function getMoviesByDirector(req, res) {
+  try {
+    const movies = await Movie.find({
+      "director.name": req.params.directorName,
+    });
+    res.json(movies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  }
+}
+
+// Export all the functions
+module.exports = {
+  getDirectorByName,
+  updateDirectorBio,
+  getMoviesByDirector,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

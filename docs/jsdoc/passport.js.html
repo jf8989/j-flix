@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: passport.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: passport.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// passport.js
+require("dotenv").config();
+
+const passport = require("passport"),
+  LocalStrategy = require("passport-local").Strategy,
+  passportJWT = require("passport-jwt");
+
+// Import the specific models
+const User = require("./models/User");
+
+let JWTStrategy = passportJWT.Strategy,
+  ExtractJWT = passportJWT.ExtractJwt;
+
+/**
+* Configures the Passport Local strategy for username/password authentication.
+* Finds user by lowercase username and validates password using the User model's method.
+* @name LocalStrategy
+* @function
+* @memberof module:passport
+* @param {object} options - Strategy options (usernameField, passwordField).
+* @param {function} verify - Verification function (`async (username, password, callback) => { ... }`).
+*/
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: "username", // Field names in the request body
+      passwordField: "password",
+    },
+    async (username, password, callback) => {
+      try {
+        // Convert username to lowercase
+        const lowerUsername = username.toLowerCase();
+        console.log("Username received for login:", username);
+        console.log("Password received for login:", password);
+        console.log("Username converted to lowercase:", lowerUsername);
+
+        // Find user with lowercase username
+        const user = await User.findOne({ Username: lowerUsername });
+
+        if (!user) {
+          console.log("Incorrect username");
+          return callback(null, false, {
+            message: "Incorrect username or password.",
+          });
+        }
+
+        // Check if password matches the stored hashed password
+        if (!user.validatePassword(password)) {
+          console.log("Incorrect password");
+          return callback(null, false, { message: "Incorrect password." });
+        }
+
+        console.log("Login successful for user:", user.Username);
+        return callback(null, user);
+      } catch (error) {
+        console.log("Error during login:", error);
+        return callback(error);
+      }
+    }
+  )
+);
+
+/**
+ * Configures the Passport JWT strategy for authenticating requests using a JWT token.
+ * Extracts the token from the Authorization Bearer header and verifies it using the JWT secret.
+ * Finds the user associated with the token payload (_id).
+ * @name JWTStrategy
+ * @function
+ * @memberof module:passport
+ * @param {object} options - Strategy options (jwtFromRequest, secretOrKey).
+ * @param {function} verify - Verification function (`async (jwtPayload, callback) => { ... }`).
+ */
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET || "your_jwt_secret", // Load secret from .env
+    },
+    async (jwtPayload, callback) => {
+      try {
+        // Find the user specified in token
+        const user = await User.findById(jwtPayload._id);
+        if (user) {
+          return callback(null, user);
+        } else {
+          return callback(null, false);
+        }
+      } catch (error) {
+        return callback(error, false);
+      }
+    }
+  )
+);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-auth.html">auth</a></li><li><a href="module-index.html">index</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addMovieToFavorites">addMovieToFavorites</a></li><li><a href="global.html#addSeriesToFavorites">addSeriesToFavorites</a></li><li><a href="global.html#connectDB">connectDB</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#generateJWTToken">generateJWTToken</a></li><li><a href="global.html#getAllMovies">getAllMovies</a></li><li><a href="global.html#getAllSeries">getAllSeries</a></li><li><a href="global.html#getDirectorByName">getDirectorByName</a></li><li><a href="global.html#getMovieByTitle">getMovieByTitle</a></li><li><a href="global.html#getMoviesByActor">getMoviesByActor</a></li><li><a href="global.html#getMoviesByDirector">getMoviesByDirector</a></li><li><a href="global.html#getMoviesByGenre">getMoviesByGenre</a></li><li><a href="global.html#getMoviesByRating">getMoviesByRating</a></li><li><a href="global.html#getMoviesByYear">getMoviesByYear</a></li><li><a href="global.html#getSeriesByActor">getSeriesByActor</a></li><li><a href="global.html#getSeriesByGenre">getSeriesByGenre</a></li><li><a href="global.html#getSeriesByRating">getSeriesByRating</a></li><li><a href="global.html#getSeriesByStatus">getSeriesByStatus</a></li><li><a href="global.html#getSeriesByTitle">getSeriesByTitle</a></li><li><a href="global.html#getSeriesByYearRange">getSeriesByYearRange</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeMovieFromFavorites">removeMovieFromFavorites</a></li><li><a href="global.html#removeSeriesFromFavorites">removeSeriesFromFavorites</a></li><li><a href="global.html#updateDirectorBio">updateDirectorBio</a></li><li><a href="global.html#updateUserInfo">updateUserInfo</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
