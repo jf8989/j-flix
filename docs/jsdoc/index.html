@@ -43,143 +43,332 @@
 
 
     <section>
-        <article><h1>j-Flix API</h1>
-<h2>🎬 Project Overview</h2>
-<p>j-Flix is a robust server-side component of a movie web application. It provides users with access to information about different movies, directors, and genres. Users can sign up, update their personal information, and create a list of their favorite movies.</p>
-<h2>🚀 Features</h2>
-<h3>Essential Features</h3>
+        <article><h1>j-Flix API 🎬</h1>
+<h2>Project Overview</h2>
+<p>j-Flix is the robust server-side component for a movie and series tracking web application. It provides users with access to detailed information about movies, series, directors, and genres. Users can register, manage their profile, and maintain lists of their favorite movies and series.</p>
+<p>This API is designed to be consumed by a client-side application, such as the <a href="https://jflix-client-2.vercel.app/welcome">J-Flix Angular Client</a>.</p>
+<h2>Features ✨</h2>
 <ul>
-<li>Retrieve a list of all movies</li>
-<li>Get detailed information about a specific movie</li>
-<li>Access data about movie genres</li>
-<li>Obtain information about directors</li>
-<li>User registration and authentication</li>
-<li>Profile management (update user info)</li>
-<li>Favorite movies list management</li>
+<li><strong>User Management:</strong> Secure user registration and login using JWT authentication. Ability to update profile information and deregister accounts.</li>
+<li><strong>Movie Catalog:</strong> Retrieve lists of all movies or specific movies by title. Access detailed information including description, genre, director, actors, release year, rating, and trailer links.</li>
+<li><strong>Series Catalog:</strong> Retrieve lists of all series or specific series by title. Access detailed information including description, creator, actors, air years, rating, genre, number of seasons, status, and trailer links.</li>
+<li><strong>Detailed Lookups:</strong> Get specific information about genres and directors (including bios).</li>
+<li><strong>Favorites:</strong> Add and remove both movies and series from a user's personalized favorites list.</li>
+<li><strong>Filtering:</strong> Fetch movies/series based on genre, actor, release year, rating, and series status.</li>
 </ul>
-<h3>Optional Features (Future Implementation)</h3>
+<h2>Technical Stack 🛠️</h2>
 <ul>
-<li>Actor information and movie appearances</li>
-<li>Extended movie details (release date, ratings)</li>
-<li>&quot;To Watch&quot; list functionality</li>
-</ul>
-<h2>🛠 Technical Stack</h2>
-<ul>
-<li><strong>Runtime</strong>: Node.js</li>
-<li><strong>Framework</strong>: Express.js</li>
-<li><strong>Database</strong>: MongoDB with Mongoose ODM</li>
-<li><strong>Authentication</strong>: JWT (JSON Web Tokens)</li>
+<li><strong>Runtime Environment</strong>: Node.js</li>
+<li><strong>Web Framework</strong>: Express.js</li>
+<li><strong>Database</strong>: MongoDB (Cloud: MongoDB Atlas / Local: Development DB)</li>
+<li><strong>ODM</strong>: Mongoose</li>
+<li><strong>Authentication</strong>: Passport.js with JWT (JSON Web Tokens) Strategy</li>
 <li><strong>API Architecture</strong>: RESTful</li>
-<li><strong>Deployment</strong>: Heroku</li>
+<li><strong>Code Documentation</strong>: JSDoc</li>
+<li><strong>Deployment</strong>: Vercel (Previously Heroku)</li>
 </ul>
-<h2>📋 API Endpoints</h2>
+<h2>API Endpoints 📋</h2>
+<p>All endpoints below (except <code>/users</code> (POST) and <code>/login</code> (POST)) require a valid JWT Bearer token in the <code>Authorization</code> header.</p>
+<p><strong>Authentication</strong></p>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>Endpoint</th>
-<th>Description</th>
-<th>Request Body</th>
-<th>Response Body</th>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Endpoint</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Request Body</th>
+<th style="text-align:left">Response Body</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>GET</td>
-<td>/movies</td>
-<td>Get all movies</td>
-<td>None</td>
-<td>JSON array of movie objects</td>
+<td style="text-align:left">POST</td>
+<td style="text-align:left">/login</td>
+<td style="text-align:left">Authenticate a user</td>
+<td style="text-align:left"><code>{ &quot;Username&quot;, &quot;Password&quot; }</code></td>
+<td style="text-align:left"><code>{ user: UserObject, token: JWT }</code></td>
 </tr>
 <tr>
-<td>GET</td>
-<td>/movies/:title</td>
-<td>Get a specific movie by title</td>
-<td>None</td>
-<td>JSON object with movie details</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/genres/:name</td>
-<td>Get genre information</td>
-<td>None</td>
-<td>JSON object with genre details</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>/directors/:name</td>
-<td>Get director information</td>
-<td>None</td>
-<td>JSON object with director details</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/users</td>
-<td>Register a new user</td>
-<td>JSON object with user data</td>
-<td>JSON object with added user data</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>/users/:username</td>
-<td>Update user information</td>
-<td>JSON object with updated user data</td>
-<td>JSON object with updated user data</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>/users/:username/movies/:movieId</td>
-<td>Add a movie to favorites</td>
-<td>None</td>
-<td>Text message confirming addition</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>/users/:username/movies/:movieId</td>
-<td>Remove a movie from favorites</td>
-<td>None</td>
-<td>Text message confirming removal</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>/users/:username</td>
-<td>Deregister a user</td>
-<td>None</td>
-<td>Text message confirming user removal</td>
+<td style="text-align:left">POST</td>
+<td style="text-align:left">/users</td>
+<td style="text-align:left">Register a new user</td>
+<td style="text-align:left"><code>{ User Details }</code></td>
+<td style="text-align:left"><code>{ user: UserObject }</code></td>
 </tr>
 </tbody>
 </table>
-<h2>🔐 Authentication and Authorization</h2>
-<p>The API uses JWT for authentication and authorization. Users need to register and login to access protected endpoints.</p>
-<h2>🔧 Installation and Setup</h2>
+<p><strong>Users</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Endpoint</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Request Body</th>
+<th style="text-align:left">Response Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PUT</td>
+<td style="text-align:left">/users/:username</td>
+<td style="text-align:left">Update user information</td>
+<td style="text-align:left"><code>{ Fields to Update }</code></td>
+<td style="text-align:left"><code>UserObject</code> (updated)</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left">/users/:username</td>
+<td style="text-align:left">Deregister a user</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>{ message: &quot;User deleted...&quot; }</code></td>
+</tr>
+<tr>
+<td style="text-align:left">POST</td>
+<td style="text-align:left">/users/:username/movies/:movieID</td>
+<td style="text-align:left">Add a movie to favorites</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>UserObject</code> (updated)</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left">/users/:username/movies/:movieID</td>
+<td style="text-align:left">Remove a movie from favorites</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>UserObject</code> (updated)</td>
+</tr>
+<tr>
+<td style="text-align:left">POST</td>
+<td style="text-align:left">/users/:username/series/:seriesID</td>
+<td style="text-align:left">Add a series to favorites</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>UserObject</code> (updated)</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left">/users/:username/series/:seriesID</td>
+<td style="text-align:left">Remove a series from favorites</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>UserObject</code> (updated)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Movies</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Endpoint</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Request Body</th>
+<th style="text-align:left">Response Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies</td>
+<td style="text-align:left">Get all movies</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies/:title</td>
+<td style="text-align:left">Get a specific movie by title</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>MovieObject</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies/genre/:name</td>
+<td style="text-align:left">Get movies by genre name</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies/actor/:actorName</td>
+<td style="text-align:left">Get movies by actor name</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies/year/:year</td>
+<td style="text-align:left">Get movies by release year</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/movies/rating/:minRating</td>
+<td style="text-align:left">Get movies by min rating</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Directors</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Endpoint</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Request Body</th>
+<th style="text-align:left">Response Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/directors/:name</td>
+<td style="text-align:left">Get director information</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>DirectorObject</code></td>
+</tr>
+<tr>
+<td style="text-align:left">PUT</td>
+<td style="text-align:left">/directors/:name/bio</td>
+<td style="text-align:left">Update director's bio</td>
+<td style="text-align:left"><code>{ &quot;bio&quot;: &quot;...&quot; }</code></td>
+<td style="text-align:left"><code>{ message: &quot;Updated bio...&quot; }</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/directors/:directorName/movies</td>
+<td style="text-align:left">Get movies by director name</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[MovieObject]</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Series</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Method</th>
+<th style="text-align:left">Endpoint</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Request Body</th>
+<th style="text-align:left">Response Body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series</td>
+<td style="text-align:left">Get all series</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/title/:title</td>
+<td style="text-align:left">Get a specific series by title</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>SeriesObject</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/genre/:name</td>
+<td style="text-align:left">Get series by genre name</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/status/:status</td>
+<td style="text-align:left">Get series by status</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/actor/:actorName</td>
+<td style="text-align:left">Get series by actor name</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/rating/:minRating</td>
+<td style="text-align:left">Get series by min rating</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+<tr>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">/series/year-range/:start/:end</td>
+<td style="text-align:left">Get series by year range</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left"><code>[SeriesObject]</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>(Note: <code>UserObject</code>, <code>MovieObject</code>, <code>SeriesObject</code>, <code>DirectorObject</code> represent the structure defined in the Mongoose models.)</em></p>
+<h2>Installation and Setup 🔧</h2>
 <ol>
-<li>Clone the repository</li>
-<li>Install dependencies: <code>npm install</code></li>
-<li>Set up environment variables (MongoDB URI, JWT Secret)</li>
-<li>Start the server: <code>npm start</code></li>
+<li><strong>Clone the repository:</strong><pre class="prettyprint source lang-bash"><code>git clone &lt;your-repo-url>
+cd &lt;repository-folder>
+</code></pre>
+</li>
+<li><strong>Install dependencies:</strong><pre class="prettyprint source lang-bash"><code>npm install
+</code></pre>
+</li>
+<li><strong>Set up environment variables:</strong>
+Create a <code>.env</code> file in the project root and add the following variables:<pre class="prettyprint source"><code>MONGODB_URI=&lt;your_mongodb_connection_string>
+JWT_SECRET=&lt;your_jwt_secret_key>
+# NODE_ENV=development (Optional: for local development DB)
+</code></pre>
+</li>
+<li><strong>Start the server:</strong>
+<ul>
+<li>For development (uses settings potentially defined for local DB in <code>config/db.js</code>):<pre class="prettyprint source lang-bash"><code>npm run dev
+</code></pre>
+</li>
+<li>For production mode:<pre class="prettyprint source lang-bash"><code>npm start
+</code></pre>
+</li>
+</ul>
+</li>
 </ol>
-<h2>🧪 Testing</h2>
-<p>API endpoints can be tested using Postman. Ensure to include the JWT token in the Authorization header for protected routes.</p>
-<h2>📚 Documentation</h2>
-<p>For detailed API documentation, please refer to the <a href="public/documentation.html">API Documentation</a>.</p>
-<h2>🤝 Contributing</h2>
-<p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
-<h2>📄 License</h2>
+<h2>Testing 🧪</h2>
+<p>API endpoints can be tested using tools like <a href="https://www.postman.com/">Postman</a> or <a href="https://insomnia.rest/">Insomnia</a>. Remember to:</p>
+<ol>
+<li>Register a user via <code>POST /users</code>.</li>
+<li>Login via <code>POST /login</code> to obtain a JWT token.</li>
+<li>Include the obtained token in the <code>Authorization</code> header for all protected routes (e.g., <code>Authorization: Bearer &lt;your_token&gt;</code>).</li>
+</ol>
+<h2>Documentation 📚</h2>
+<p>Detailed documentation for the API, including function descriptions, parameters, and route details, has been generated using JSDoc.</p>
+<p><strong>To view the documentation:</strong></p>
+<ol>
+<li>Ensure you have run <code>npm install</code> to install dev dependencies (including <code>jsdoc</code>).</li>
+<li>Generate the documentation (if not already present):<pre class="prettyprint source lang-bash"><code>npx jsdoc -c jsdoc.json
+</code></pre>
+</li>
+<li>Open the generated <code>docs/jsdoc/index.html</code> file in your web browser.</li>
+</ol>
+<h2>Contributing 🤝</h2>
+<p>Contributions, issues, and feature requests are welcome! Please feel free to submit a Pull Request or open an issue.</p>
+<h2>License 📄</h2>
 <p>This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). This means you are free to:</p>
 <ul>
-<li>Share — copy and redistribute the material in any medium or format</li>
-<li>Adapt — remix, transform, and build upon the material</li>
+<li><strong>Share</strong> — copy and redistribute the material in any medium or format</li>
+<li><strong>Adapt</strong> — remix, transform, and build upon the material</li>
 </ul>
 <p>Under the following terms:</p>
 <ul>
-<li>Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.</li>
-<li>NonCommercial — You may not use the material for commercial purposes.</li>
+<li><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made.</li>
+<li><strong>NonCommercial</strong> — You may not use the material for commercial purposes.</li>
 </ul>
 <p>See the <a href="LICENSE.md">LICENSE.md</a> file in the project root for the full license text.</p>
-<h2>👨‍💻 Author</h2>
-<p>Juan Francisco Marcenaro A. - Full Stack Developer in training</p>
+<h2>Author 👨‍💻</h2>
+<p><strong>Juan Francisco Marcenaro A.</strong> - Full Stack Developer in training</p>
 <hr>
-<p>For any additional information or queries, please open an issue or contact the repository owner.</p></article>
+<p><em>For any additional information or queries, please open an issue.</em></p></article>
     </section>
 
 
@@ -196,7 +385,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:24:01 GMT-0500 (Peru Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Apr 17 2025 23:35:03 GMT-0500 (Peru Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
