@@ -6,6 +6,15 @@ const Series = require("../models/Series");
 const { validationResult } = require("express-validator");
 
 // Register a new user
+/**
+ * Registers a new user.
+ * Validates input, checks for existing user, hashes password, and saves the new user.
+ * @function registerUser
+ * @param {object} req - Express request object containing user details in `req.body` (username, password, email, birthday).
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the newly created user object (excluding password) or 400/422/500 error.
+ * @async
+ */
 async function registerUser(req, res) {
   // Check for validation errors
   let errors = validationResult(req);
@@ -52,6 +61,15 @@ async function registerUser(req, res) {
 }
 
 // Update user information (partial updates)
+/**
+ * Updates an existing user's information (partial updates allowed).
+ * Validates input, finds user by username, applies updates from `req.body` (username, password, email, birthday). Hashes password if provided.
+ * @function updateUserInfo
+ * @param {object} req - Express request object, expects `req.params.username` and fields to update in `req.body`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the updated user object or 404/422/500 error.
+ * @async
+ */
 async function updateUserInfo(req, res) {
   // Check for validation errors
   let errors = validationResult(req);
@@ -89,6 +107,16 @@ async function updateUserInfo(req, res) {
 }
 
 // Add a movie to a user's favorites
+/**
+ * Adds a movie to a user's list of favorite movies.
+ * Uses username from `req.params.username` and movie ID from `req.params.movieID`.
+ * Validates movie ID and checks if the movie exists. Uses `$addToSet` to prevent duplicates.
+ * @function addMovieToFavorites
+ * @param {object} req - Express request object, expects `req.params.username` and `req.params.movieID`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the updated user object or 404/500 error.
+ * @async
+ */
 async function addMovieToFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
@@ -133,6 +161,16 @@ async function addMovieToFavorites(req, res) {
 }
 
 // Remove a movie from a user's favorites
+/**
+ * Removes a movie from a user's list of favorite movies.
+ * Uses username from `req.params.username` and movie ID from `req.params.movieID`.
+ * Uses `$pull` to remove the movie ID from the favorites array.
+ * @function removeMovieFromFavorites
+ * @param {object} req - Express request object, expects `req.params.username` and `req.params.movieID`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the updated user object or 404/500 error.
+ * @async
+ */
 async function removeMovieFromFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
@@ -163,6 +201,15 @@ async function removeMovieFromFavorites(req, res) {
 }
 
 // Delete a user by username
+/**
+ * Deletes a user account by username.
+ * Uses username from `req.params.username`.
+ * @function deleteUser
+ * @param {object} req - Express request object, expects `req.params.username`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response confirming deletion or 404/500 error.
+ * @async
+ */
 async function deleteUser(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
@@ -185,6 +232,16 @@ async function deleteUser(req, res) {
 }
 
 // Add a series to a user's favorites
+/**
+ * Adds a series to a user's list of favorite series.
+ * Uses username from `req.params.username` and series ID from `req.params.seriesID`.
+ * Validates series ID and checks if the series exists. Uses `$addToSet` to prevent duplicates.
+ * @function addSeriesToFavorites
+ * @param {object} req - Express request object, expects `req.params.username` and `req.params.seriesID`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the updated user object or 404/500 error.
+ * @async
+ */
 async function addSeriesToFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();
@@ -227,6 +284,16 @@ async function addSeriesToFavorites(req, res) {
 }
 
 // Remove a series from a user's favorites
+/**
+ * Removes a series from a user's list of favorite series.
+ * Uses username from `req.params.username` and series ID from `req.params.seriesID`.
+ * Uses `$pull` to remove the series ID from the favorites array.
+ * @function removeSeriesFromFavorites
+ * @param {object} req - Express request object, expects `req.params.username` and `req.params.seriesID`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with the updated user object or 404/500 error.
+ * @async
+ */
 async function removeSeriesFromFavorites(req, res) {
   try {
     const lowerUsername = req.params.username.toLowerCase();

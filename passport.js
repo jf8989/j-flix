@@ -11,6 +11,15 @@ const User = require("./models/User");
 let JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
 
+/**
+* Configures the Passport Local strategy for username/password authentication.
+* Finds user by lowercase username and validates password using the User model's method.
+* @name LocalStrategy
+* @function
+* @memberof module:passport
+* @param {object} options - Strategy options (usernameField, passwordField).
+* @param {function} verify - Verification function (`async (username, password, callback) => { ... }`).
+*/
 passport.use(
   new LocalStrategy(
     {
@@ -51,6 +60,16 @@ passport.use(
   )
 );
 
+/**
+ * Configures the Passport JWT strategy for authenticating requests using a JWT token.
+ * Extracts the token from the Authorization Bearer header and verifies it using the JWT secret.
+ * Finds the user associated with the token payload (_id).
+ * @name JWTStrategy
+ * @function
+ * @memberof module:passport
+ * @param {object} options - Strategy options (jwtFromRequest, secretOrKey).
+ * @param {function} verify - Verification function (`async (jwtPayload, callback) => { ... }`).
+ */
 passport.use(
   new JWTStrategy(
     {

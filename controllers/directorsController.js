@@ -3,6 +3,15 @@
 const Movie = require("../models/Movie");
 
 // Get a director by name
+/**
+ * Retrieves director information by name.
+ * Finds a movie associated with the director name provided in request parameters.
+ * @function getDirectorByName
+ * @param {object} req - Express request object, expects `req.params.name`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with director data or 404/500 error.
+ * @async
+ */
 async function getDirectorByName(req, res) {
   try {
     const movie = await Movie.findOne({ "director.name": req.params.name });
@@ -18,6 +27,15 @@ async function getDirectorByName(req, res) {
 }
 
 // Update the bio of a director in multiple movies
+/**
+ * Updates the biography of a director across all movies they directed.
+ * Uses the director name from `req.params.name` and the new bio from `req.body.bio`.
+ * @function updateDirectorBio
+ * @param {object} req - Express request object, expects `req.params.name` and `req.body.bio`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with update status or 404/500 error.
+ * @async
+ */
 async function updateDirectorBio(req, res) {
   try {
     const result = await Movie.updateMany(
@@ -41,6 +59,15 @@ async function updateDirectorBio(req, res) {
 }
 
 // Get all movies by a director
+/**
+ * Retrieves all movies directed by a specific director.
+ * Uses the director name provided in `req.params.directorName`.
+ * @function getMoviesByDirector
+ * @param {object} req - Express request object, expects `req.params.directorName`.
+ * @param {object} res - Express response object.
+ * @returns {Promise<void>} Sends JSON response with an array of movies or 500 error.
+ * @async
+ */
 async function getMoviesByDirector(req, res) {
   try {
     const movies = await Movie.find({

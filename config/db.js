@@ -8,6 +8,16 @@ const uri =
     ? "mongodb://localhost:27017/myFlixDB" // Local DB for development
     : process.env.MONGODB_URI; // MongoDB Atlas for production
 
+
+/**
+* Asynchronously connects to the MongoDB database using Mongoose.
+* Selects the appropriate database URI based on the NODE_ENV environment variable.
+* Logs connection status and handles connection errors.
+* Optionally drops the 'users' collection in development mode.
+* @async
+* @function connectDB
+* @throws {Error} If the database connection fails.
+*/
 async function connectDB() {
   try {
     // Connect to the MongoDB database

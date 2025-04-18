@@ -6,6 +6,12 @@ const passport = require("passport");
 
 require("./passport"); // Your local passport file
 
+/**
+ * Generates a JWT token for a given user object.
+ * @function generateJWTToken
+ * @param {object} user - The user object to encode in the token (should include Username).
+ * @returns {string} The generated JWT token.
+ */
 function generateJWTToken(user) {
   return jwt.sign(user, jwtSecret, {
     subject: user.Username, // This is the username you're encoding in the JWT
@@ -14,7 +20,21 @@ function generateJWTToken(user) {
   });
 }
 
+/**
+ * Sets up the login endpoint using Passport local strategy.
+ * @module auth
+ * @param {object} app - The Express application instance.
+ */
 module.exports = (app) => {
+  /**
+ * Handles user login requests. Authenticates using Passport's 'local' strategy.
+ * On successful authentication, generates a JWT token and sends user data and token in response.
+ * @name POST /login
+ * @function
+ * @memberof module:auth
+ * @param {string} path - Express path.
+ * @param {callback} middleware - Passport authentication middleware.
+ */
   app.post("/login", (req, res) => {
     console.log("Login request received");
     console.log("Login request received:", req.body);

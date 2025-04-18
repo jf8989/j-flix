@@ -1,4 +1,11 @@
 // index.js
+/**
+ * Main application file for the j-Flix API.
+ * Sets up Express server, middleware (Morgan, CORS, JSON parsing, static files),
+ * connects to MongoDB, initializes Passport for authentication, defines routes,
+ * and starts the server.
+ * @module index
+ */
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
@@ -56,6 +63,14 @@ const directorsRoutes = require("./routes/directors");
 const seriesRoutes = require("./routes/series");
 
 // Add the root route here, before other route definitions
+/**
+ * Serves a welcome message for the root endpoint.
+ * @name GET /
+ * @function
+ * @memberof module:index
+ * @param {string} path - Express path.
+ * @param {callback} middleware - Route handler.
+ */
 app.get("/", (req, res) => {
   res.send("Welcome to the Movie API");
 });
@@ -67,6 +82,16 @@ app.use("/directors", directorsRoutes);
 app.use("/series", seriesRoutes);
 
 // Error handling middleware
+/**
+ * Global error handling middleware.
+ * Logs the error stack trace and sends a generic 500 response.
+ * @function ErrorHandler
+ * @memberof module:index
+ * @param {Error} err - The error object.
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
